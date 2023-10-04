@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "code": 200,
+    "status": "success",
+    "message": "User registered successfully"
+  },
+  "data": {
+    "access_token": "44|A4q2xnNEGXDbgXvnVwZCe57k30ZhDQQrtR4DZcJ7",
+    "token_type": "Bearer",
+    "user": {
+      "id": 33,
+      "name": "John Doe",
+      "username": null,
+      "email": "john.doe@example.com",
+      "email_verified_at": null,
+      "birthdate": null,
+      "bio": null,
+      "links": null,
+      "phone_number": null,
+      "otp_code": "6399",
+      "two_factor_confirmed_at": null,
+      "current_team_id": null,
+      "profile_photo_path": "images/picture1.jpg",
+      "created_at": "2023-08-02T12:08:08.000000Z",
+      "updated_at": "2023-08-02T12:08:08.000000Z",
+      "role": "open trip",
+      "file": "baihaqicool329@gmail.com2023-08-02 12:08:08.pdf",
+      "profile_photo_url": "https://ui-avatars.com/api/?name=j&color=7F9CF5&background=EBF4FF"
+    }
+  }
+}

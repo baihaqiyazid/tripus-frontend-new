@@ -1,0 +1,843 @@
+{
+  "meta": {
+    "code": 200,
+    "status": "success",
+    "message": "success get all data"
+  },
+  "data": {
+    "feeds": [
+      {
+        "id": 12,
+        "user_id": 35,
+        "description": "Eee yawww",
+        "location": "Superindo, Jl. Dr. Ratna, Bekasi, West Java 17412, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-04T03:02:56+07:00",
+        "updated_at": "2023-09-04T03:02:56+07:00",
+        "user": {
+          "id": 35,
+          "name": "john",
+          "username": null,
+          "email": "baihaqiyazid16@gmail.com",
+          "email_verified_at": "2023-08-03T20:58:44.000000Z",
+          "birthdate": null,
+          "bio": null,
+          "links": null,
+          "phone_number": null,
+          "otp_code": "0955",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": null,
+          "background_image_url": null,
+          "created_at": "2023-08-03T20:57:18.000000Z",
+          "updated_at": "2023-08-28T06:54:31.000000Z",
+          "role": "open trip",
+          "file": "baihaqiyazid16@gmail.com2023-08-04 03:57:18.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://ui-avatars.com/api/?name=j&color=7F9CF5&background=EBF4FF"
+        },
+        "feed_image": [
+          {
+            "id": 16,
+            "feed_id": 12,
+            "image_url": "images/feeds/3502023-09-04 03:02:56.webp",
+            "created_at": "2023-09-03T20:02:56.000000Z",
+            "updated_at": "2023-09-03T20:02:56.000000Z"
+          }
+        ],
+        "feeds_likes": [],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 11,
+        "user_id": 61,
+        "description": "loremm",
+        "location": "Makassar, South Sulawesi, Indonesia",
+        "meeting_point": "Makassar Trade Centre (MTC), Jl. Jend. Ahmad Yani No. 49, Makassar, South Sulawesi 90174, Indonesia",
+        "type": "open trip",
+        "title": "Makassar Advanture",
+        "payment_account": "12345699956",
+        "max_person": 44,
+        "fee": 3000000,
+        "date_end": "2023-09-16 00:00:00.000",
+        "date_start": "2023-09-11 00:00:00.000",
+        "category_id": "ALAM",
+        "others": "nn",
+        "exclude": "nn",
+        "include": "nnn",
+        "created_at": "2023-09-02T07:10:16+07:00",
+        "updated_at": "2023-09-03T00:30:31+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 14,
+            "feed_id": 11,
+            "image_url": "images/trips/6102023-09-02 07:10:16.webp",
+            "created_at": "2023-09-02T00:10:16.000000Z",
+            "updated_at": "2023-09-02T00:10:16.000000Z"
+          },
+          {
+            "id": 15,
+            "feed_id": 11,
+            "image_url": "images/trips/6112023-09-02 07:10:16.webp",
+            "created_at": "2023-09-02T00:10:16.000000Z",
+            "updated_at": "2023-09-02T00:10:16.000000Z"
+          }
+        ],
+        "feeds_likes": [
+          {
+            "id": 7,
+            "feed_id": 11,
+            "user_id": 61,
+            "created_at": "2023-09-03T18:27:10.000000Z",
+            "updated_at": "2023-09-03T18:27:10.000000Z"
+          }
+        ],
+        "feeds_saves": [],
+        "feeds_join": [
+          {
+            "id": 7,
+            "feed_id": 11,
+            "user_id": 61,
+            "created_at": "2023-09-02T17:27:22.000000Z",
+            "updated_at": "2023-09-02T17:27:22.000000Z"
+          },
+          {
+            "id": 8,
+            "feed_id": 11,
+            "user_id": 61,
+            "created_at": "2023-09-02T17:30:31.000000Z",
+            "updated_at": "2023-09-02T17:30:31.000000Z"
+          },
+          {
+            "id": 9,
+            "feed_id": 11,
+            "user_id": 61,
+            "created_at": "2023-09-02T17:30:31.000000Z",
+            "updated_at": "2023-09-02T17:30:31.000000Z"
+          },
+          {
+            "id": 10,
+            "feed_id": 11,
+            "user_id": 61,
+            "created_at": "2023-09-02T17:30:31.000000Z",
+            "updated_at": "2023-09-02T17:30:31.000000Z"
+          },
+          {
+            "id": 11,
+            "feed_id": 11,
+            "user_id": 61,
+            "created_at": "2023-09-02T17:30:31.000000Z",
+            "updated_at": "2023-09-02T17:30:31.000000Z"
+          }
+        ],
+        "cancel_trip": [
+          {
+            "id": 3,
+            "feed_id": 11,
+            "file": "yazidbaihaqi16@gmail.com2023-09-10 13:06:37.pdf",
+            "reason": "ada halangan",
+            "status": "pending",
+            "created_at": "2023-09-10T06:06:37.000000Z",
+            "updated_at": "2023-09-10T06:06:37.000000Z"
+          }
+        ],
+        "withdraw_trip": [
+          {
+            "id": 1,
+            "feed_id": 11,
+            "file": "yazidbaihaqi16@gmail.com2023-09-10 13:12:11.pdf",
+            "status": "pending",
+            "created_at": "2023-09-10T06:12:11.000000Z",
+            "updated_at": "2023-09-10T06:12:11.000000Z"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "user_id": 61,
+        "description": "eeyaww",
+        "location": "Riau, Indonesia",
+        "meeting_point": "Bandara Soekarno Hatta Gate C6, Tangerang, Banten 15126, Indonesia",
+        "type": "open trip",
+        "title": "Riau Advanture",
+        "payment_account": "12345699956",
+        "max_person": 20,
+        "fee": 1500000,
+        "date_end": "2023-09-13 00:00:00.000",
+        "date_start": "2023-09-10 00:00:00.000",
+        "category_id": "BUDAYA",
+        "others": "nope",
+        "exclude": "all",
+        "include": "all",
+        "created_at": "2023-09-01T21:01:12+07:00",
+        "updated_at": "2023-09-01T21:01:12+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 12,
+            "feed_id": 10,
+            "image_url": "images/trips/6102023-09-01 21:01:12.jpg",
+            "created_at": "2023-09-01T14:01:12.000000Z",
+            "updated_at": "2023-09-01T14:01:12.000000Z"
+          },
+          {
+            "id": 13,
+            "feed_id": 10,
+            "image_url": "images/trips/6112023-09-01 21:01:12.jpg",
+            "created_at": "2023-09-01T14:01:12.000000Z",
+            "updated_at": "2023-09-01T14:01:12.000000Z"
+          }
+        ],
+        "feeds_likes": [
+          {
+            "id": 12,
+            "feed_id": 10,
+            "user_id": 35,
+            "created_at": "2023-09-03T19:58:50.000000Z",
+            "updated_at": "2023-09-03T19:58:50.000000Z"
+          }
+        ],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 9,
+        "user_id": 61,
+        "description": "hee",
+        "location": "Heram, Jayapura, Papua, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:57:37+07:00",
+        "updated_at": "2023-09-01T20:57:37+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 11,
+            "feed_id": 9,
+            "image_url": "images/feeds/6102023-09-01 20:57:37.jpg",
+            "created_at": "2023-09-01T13:57:37.000000Z",
+            "updated_at": "2023-09-01T13:57:37.000000Z"
+          }
+        ],
+        "feeds_likes": [
+          {
+            "id": 6,
+            "feed_id": 9,
+            "user_id": 61,
+            "created_at": "2023-09-02T00:50:28.000000Z",
+            "updated_at": "2023-09-02T00:50:28.000000Z"
+          }
+        ],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 8,
+        "user_id": 61,
+        "description": "hello",
+        "location": "Kotabaru, 55224, Gondokusuman, Yogyakarta, Daerah Istimewa Yogyakarta, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:51:12+07:00",
+        "updated_at": "2023-09-01T20:51:12+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 10,
+            "feed_id": 8,
+            "image_url": "images/feeds/6102023-09-01 20:51:12.jpg",
+            "created_at": "2023-09-01T13:51:12.000000Z",
+            "updated_at": "2023-09-01T13:51:12.000000Z"
+          }
+        ],
+        "feeds_likes": [],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 7,
+        "user_id": 61,
+        "description": "helii",
+        "location": "Kuningan, West Java, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:45:38+07:00",
+        "updated_at": "2023-09-01T20:45:38+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 9,
+            "feed_id": 7,
+            "image_url": "images/feeds/6102023-09-01 20:45:38.jpg",
+            "created_at": "2023-09-01T13:45:38.000000Z",
+            "updated_at": "2023-09-01T13:45:38.000000Z"
+          }
+        ],
+        "feeds_likes": [],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 6,
+        "user_id": 61,
+        "description": "halo",
+        "location": "Duren Tiga, 12760, Pancoran, Jakarta, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:42:39+07:00",
+        "updated_at": "2023-09-01T20:42:39+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 8,
+            "feed_id": 6,
+            "image_url": "images/feeds/6102023-09-01 20:42:39.jpg",
+            "created_at": "2023-09-01T13:42:39.000000Z",
+            "updated_at": "2023-09-01T13:42:39.000000Z"
+          }
+        ],
+        "feeds_likes": [],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 5,
+        "user_id": 61,
+        "description": "qq",
+        "location": "Jakarta Airport Hotel, Terminal 2E, Tangerang, Banten 15126, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:38:00+07:00",
+        "updated_at": "2023-09-01T20:38:00+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 7,
+            "feed_id": 5,
+            "image_url": "images/feeds/6102023-09-01 20:38:00.webp",
+            "created_at": "2023-09-01T13:38:00.000000Z",
+            "updated_at": "2023-09-01T13:38:00.000000Z"
+          }
+        ],
+        "feeds_likes": [],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 4,
+        "user_id": 61,
+        "description": "iiiss",
+        "location": "Mampang Prapatan, Jakarta, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:29:49+07:00",
+        "updated_at": "2023-09-01T20:29:49+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 5,
+            "feed_id": 4,
+            "image_url": "images/feeds/6102023-09-01 20:29:49.webp",
+            "created_at": "2023-09-01T13:29:49.000000Z",
+            "updated_at": "2023-09-01T13:29:49.000000Z"
+          },
+          {
+            "id": 6,
+            "feed_id": 4,
+            "image_url": "images/feeds/6112023-09-01 20:29:49.jpg",
+            "created_at": "2023-09-01T13:29:49.000000Z",
+            "updated_at": "2023-09-01T13:29:49.000000Z"
+          }
+        ],
+        "feeds_likes": [],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 3,
+        "user_id": 61,
+        "description": "Lorem",
+        "location": "Jakarta, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T20:15:25+07:00",
+        "updated_at": "2023-09-01T20:15:25+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 4,
+            "feed_id": 3,
+            "image_url": "images/feeds/6102023-09-01 20:15:25.webp",
+            "created_at": "2023-09-01T13:15:25.000000Z",
+            "updated_at": "2023-09-01T13:15:25.000000Z"
+          }
+        ],
+        "feeds_likes": [
+          {
+            "id": 3,
+            "feed_id": 3,
+            "user_id": 61,
+            "created_at": "2023-09-01T13:29:00.000000Z",
+            "updated_at": "2023-09-01T13:29:00.000000Z"
+          }
+        ],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 2,
+        "user_id": 61,
+        "description": "loremm",
+        "location": "Balikpapan, East Kalimantan, Indonesia",
+        "meeting_point": null,
+        "type": "feed",
+        "title": null,
+        "payment_account": null,
+        "max_person": null,
+        "fee": null,
+        "date_end": null,
+        "date_start": null,
+        "category_id": null,
+        "others": null,
+        "exclude": null,
+        "include": null,
+        "created_at": "2023-09-01T19:06:50+07:00",
+        "updated_at": "2023-09-01T19:06:50+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 3,
+            "feed_id": 2,
+            "image_url": "images/feeds/6102023-09-01 19:06:50.jpg",
+            "created_at": "2023-09-01T12:06:50.000000Z",
+            "updated_at": "2023-09-01T12:06:50.000000Z"
+          }
+        ],
+        "feeds_likes": [
+          {
+            "id": 2,
+            "feed_id": 2,
+            "user_id": 61,
+            "created_at": "2023-09-01T13:08:36.000000Z",
+            "updated_at": "2023-09-01T13:08:36.000000Z"
+          },
+          {
+            "id": 10,
+            "feed_id": 2,
+            "user_id": 35,
+            "created_at": "2023-09-03T19:57:55.000000Z",
+            "updated_at": "2023-09-03T19:57:55.000000Z"
+          }
+        ],
+        "feeds_saves": [
+          {
+            "id": 5,
+            "feed_id": 2,
+            "user_id": 61,
+            "created_at": "2023-09-01T14:44:24.000000Z",
+            "updated_at": "2023-09-01T14:44:24.000000Z"
+          },
+          {
+            "id": 7,
+            "feed_id": 2,
+            "user_id": 35,
+            "created_at": "2023-09-03T19:57:55.000000Z",
+            "updated_at": "2023-09-03T19:57:55.000000Z"
+          }
+        ],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      },
+      {
+        "id": 1,
+        "user_id": 61,
+        "description": "lorem ipsum",
+        "location": "Bali, Indonesia",
+        "meeting_point": "Ngurah Rai International Airport (DPS), Ngurah Rai Airport, International Departure, Badung, Bali 80361, Indonesia",
+        "type": "open trip",
+        "title": "Bali Advanture",
+        "payment_account": "123456789",
+        "max_person": 20,
+        "fee": 2500000,
+        "date_end": "2023-09-10 00:00:00.000",
+        "date_start": "2023-09-09 00:00:00.000",
+        "category_id": "ALAM",
+        "others": null,
+        "exclude": "lorem",
+        "include": "lorem",
+        "created_at": "2023-08-31T11:24:46+07:00",
+        "updated_at": "2023-08-31T11:24:46+07:00",
+        "user": {
+          "id": 61,
+          "name": "Yaazzzyyyy",
+          "username": null,
+          "email": "yazidbaihaqi16@gmail.com",
+          "email_verified_at": "2023-08-08T02:02:15.000000Z",
+          "birthdate": "2001-12-14",
+          "bio": "holllaaaa",
+          "links": "@baihaqy___",
+          "phone_number": "0895392498133",
+          "otp_code": "1592",
+          "two_factor_confirmed_at": null,
+          "current_team_id": null,
+          "profile_photo_path": "images/profile/61yazidbaihaqi16@gmail.comWQF.jpg",
+          "background_image_url": "images/background/61yazidbaihaqi16@gmail.com.jpg",
+          "created_at": "2023-08-08T02:01:51.000000Z",
+          "updated_at": "2023-08-28T06:54:34.000000Z",
+          "role": "open trip",
+          "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+          "status": "reject",
+          "profile_photo_url": "https://tripus.id/storage/images/profile/61yazidbaihaqi16@gmail.comWQF.jpg"
+        },
+        "feed_image": [
+          {
+            "id": 1,
+            "feed_id": 1,
+            "image_url": "images/trips/6102023-08-31 11:24:46.jpg",
+            "created_at": "2023-08-31T04:24:46.000000Z",
+            "updated_at": "2023-08-31T04:24:46.000000Z"
+          },
+          {
+            "id": 2,
+            "feed_id": 1,
+            "image_url": "images/trips/6112023-08-31 11:24:46.jpg",
+            "created_at": "2023-08-31T04:24:46.000000Z",
+            "updated_at": "2023-08-31T04:24:46.000000Z"
+          }
+        ],
+        "feeds_likes": [
+          {
+            "id": 9,
+            "feed_id": 1,
+            "user_id": 61,
+            "created_at": "2023-09-03T18:50:17.000000Z",
+            "updated_at": "2023-09-03T18:50:17.000000Z"
+          },
+          {
+            "id": 13,
+            "feed_id": 1,
+            "user_id": 35,
+            "created_at": "2023-09-07T01:18:44.000000Z",
+            "updated_at": "2023-09-07T01:18:44.000000Z"
+          }
+        ],
+        "feeds_saves": [],
+        "feeds_join": [],
+        "cancel_trip": [],
+        "withdraw_trip": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,766 @@
+{
+  "meta": {
+    "code": 200,
+    "status": "success",
+    "message": "success get all data"
+  },
+  "data": {
+    "users": [
+      {
+        "id": 34,
+        "name": "john",
+        "username": null,
+        "email": "baihaqicool329@gmail.com",
+        "email_verified_at": "2023-08-02T19:59:12.000000Z",
+        "birthdate": null,
+        "bio": null,
+        "links": null,
+        "phone_number": null,
+        "otp_code": "5848",
+        "two_factor_confirmed_at": null,
+        "current_team_id": null,
+        "profile_photo_path": null,
+        "created_at": "2023-08-02T07:54:34.000000Z",
+        "updated_at": "2023-08-02T19:59:12.000000Z",
+        "role": "user",
+        "file": null,
+        "profile_photo_url": "https://ui-avatars.com/api/?name=j&color=7F9CF5&background=EBF4FF",
+        "feeds": [
+          {
+            "id": 99,
+            "user_id": 34,
+            "description": "lorem ipsum",
+            "location": "Jakarta",
+            "created_at": "2023-08-11T08:45:21+07:00",
+            "updated_at": "2023-08-11T08:45:21+07:00",
+            "feed_image": [
+              {
+                "id": 115,
+                "feed_id": 99,
+                "image_url": "images/feeds/3402023-08-11 08:45:21.jpg",
+                "created_at": "2023-08-11T01:45:21.000000Z",
+                "updated_at": "2023-08-11T01:45:21.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 100,
+            "user_id": 34,
+            "description": "lorem ipsum",
+            "location": "Jakarta",
+            "created_at": "2023-08-11T08:52:36+07:00",
+            "updated_at": "2023-08-11T08:52:36+07:00",
+            "feed_image": [
+              {
+                "id": 116,
+                "feed_id": 100,
+                "image_url": "images/feeds/3402023-08-11 08:52:36.jpg",
+                "created_at": "2023-08-11T01:52:36.000000Z",
+                "updated_at": "2023-08-11T01:52:36.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          }
+        ]
+      },
+      {
+        "id": 35,
+        "name": "john",
+        "username": null,
+        "email": "baihaqiyazid16@gmail.com",
+        "email_verified_at": "2023-08-03T20:58:44.000000Z",
+        "birthdate": null,
+        "bio": null,
+        "links": null,
+        "phone_number": null,
+        "otp_code": "0955",
+        "two_factor_confirmed_at": null,
+        "current_team_id": null,
+        "profile_photo_path": null,
+        "created_at": "2023-08-03T20:57:18.000000Z",
+        "updated_at": "2023-08-03T20:58:44.000000Z",
+        "role": "open trip",
+        "file": "baihaqiyazid16@gmail.com2023-08-04 03:57:18.pdf",
+        "profile_photo_url": "https://ui-avatars.com/api/?name=j&color=7F9CF5&background=EBF4FF",
+        "feeds": []
+      },
+      {
+        "id": 61,
+        "name": "Baihaqi",
+        "username": null,
+        "email": "yazidbaihaqi16@gmail.com",
+        "email_verified_at": "2023-08-08T02:02:15.000000Z",
+        "birthdate": null,
+        "bio": null,
+        "links": null,
+        "phone_number": null,
+        "otp_code": "1592",
+        "two_factor_confirmed_at": null,
+        "current_team_id": null,
+        "profile_photo_path": null,
+        "created_at": "2023-08-08T02:01:51.000000Z",
+        "updated_at": "2023-08-08T02:02:15.000000Z",
+        "role": "open trip",
+        "file": "yazidbaihaqi16@gmail.com2023-08-08 09:01:51.pdf",
+        "profile_photo_url": "https://ui-avatars.com/api/?name=B&color=7F9CF5&background=EBF4FF",
+        "feeds": [
+          {
+            "id": 87,
+            "user_id": 61,
+            "description": "Hello World!!",
+            "location": "Pancoran, Jakarta, Indonesia",
+            "created_at": "2023-08-10T13:10:31+07:00",
+            "updated_at": "2023-08-10T13:10:31+07:00",
+            "feed_image": [
+              {
+                "id": 102,
+                "feed_id": 87,
+                "image_url": "images/feeds/6102023-08-10 13:10:31.jpg",
+                "created_at": "2023-08-10T06:10:31.000000Z",
+                "updated_at": "2023-08-10T06:10:31.000000Z"
+              },
+              {
+                "id": 103,
+                "feed_id": 87,
+                "image_url": "images/feeds/6112023-08-10 13:10:31.jpg",
+                "created_at": "2023-08-10T06:10:31.000000Z",
+                "updated_at": "2023-08-10T06:10:31.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": [
+              {
+                "id": 8,
+                "feed_id": 87,
+                "user_id": 34,
+                "created_at": "2023-08-10T09:51:44.000000Z",
+                "updated_at": "2023-08-10T09:51:44.000000Z"
+              }
+            ]
+          },
+          {
+            "id": 88,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-10T18:08:03+07:00",
+            "updated_at": "2023-08-10T18:08:03+07:00",
+            "feed_image": [
+              {
+                "id": 104,
+                "feed_id": 88,
+                "image_url": "images/feeds/6102023-08-10 18:08:03.jpg",
+                "created_at": "2023-08-10T11:08:03.000000Z",
+                "updated_at": "2023-08-10T11:08:03.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 89,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-10T19:22:53+07:00",
+            "updated_at": "2023-08-10T19:22:53+07:00",
+            "feed_image": [
+              {
+                "id": 105,
+                "feed_id": 89,
+                "image_url": "images/feeds/6102023-08-10 19:22:53.jpg",
+                "created_at": "2023-08-10T12:22:53.000000Z",
+                "updated_at": "2023-08-10T12:22:53.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 90,
+            "user_id": 61,
+            "description": "testttt youww",
+            "location": "Bekasi, West Java, Indonesia",
+            "created_at": "2023-08-11T00:55:46+07:00",
+            "updated_at": "2023-08-11T00:55:46+07:00",
+            "feed_image": [
+              {
+                "id": 106,
+                "feed_id": 90,
+                "image_url": "images/feeds/6102023-08-11 00:55:46.jpg",
+                "created_at": "2023-08-10T17:55:46.000000Z",
+                "updated_at": "2023-08-10T17:55:46.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 91,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:00:29+07:00",
+            "updated_at": "2023-08-11T08:00:29+07:00",
+            "feed_image": [
+              {
+                "id": 107,
+                "feed_id": 91,
+                "image_url": "images/feeds/6102023-08-11 08:00:29.jpg",
+                "created_at": "2023-08-11T01:00:29.000000Z",
+                "updated_at": "2023-08-11T01:00:29.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 92,
+            "user_id": 61,
+            "description": "Ngopiiii",
+            "location": "Madura, 53265, Wanareja, Cilacap, Central Java, Indonesia",
+            "created_at": "2023-08-11T08:01:47+07:00",
+            "updated_at": "2023-08-11T08:01:47+07:00",
+            "feed_image": [
+              {
+                "id": 108,
+                "feed_id": 92,
+                "image_url": "images/feeds/6102023-08-11 08:01:47.jpg",
+                "created_at": "2023-08-11T01:01:47.000000Z",
+                "updated_at": "2023-08-11T01:01:47.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 93,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:04:45+07:00",
+            "updated_at": "2023-08-11T08:04:45+07:00",
+            "feed_image": [
+              {
+                "id": 109,
+                "feed_id": 93,
+                "image_url": "images/feeds/6102023-08-11 08:04:45.jpg",
+                "created_at": "2023-08-11T01:04:45.000000Z",
+                "updated_at": "2023-08-11T01:04:45.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 94,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:07:45+07:00",
+            "updated_at": "2023-08-11T08:07:45+07:00",
+            "feed_image": [
+              {
+                "id": 110,
+                "feed_id": 94,
+                "image_url": "images/feeds/6102023-08-11 08:07:45.jpg",
+                "created_at": "2023-08-11T01:07:45.000000Z",
+                "updated_at": "2023-08-11T01:07:45.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 95,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:12:36+07:00",
+            "updated_at": "2023-08-11T08:12:36+07:00",
+            "feed_image": [
+              {
+                "id": 111,
+                "feed_id": 95,
+                "image_url": "images/feeds/6102023-08-11 08:12:36.jpg",
+                "created_at": "2023-08-11T01:12:36.000000Z",
+                "updated_at": "2023-08-11T01:12:36.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 96,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:18:42+07:00",
+            "updated_at": "2023-08-11T08:18:42+07:00",
+            "feed_image": [
+              {
+                "id": 112,
+                "feed_id": 96,
+                "image_url": "images/feeds/6102023-08-11 08:18:42.jpg",
+                "created_at": "2023-08-11T01:18:42.000000Z",
+                "updated_at": "2023-08-11T01:18:42.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 97,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:22:51+07:00",
+            "updated_at": "2023-08-11T08:22:51+07:00",
+            "feed_image": [
+              {
+                "id": 113,
+                "feed_id": 97,
+                "image_url": "images/feeds/6102023-08-11 08:22:51.jpg",
+                "created_at": "2023-08-11T01:22:51.000000Z",
+                "updated_at": "2023-08-11T01:22:51.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 98,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T08:27:00+07:00",
+            "updated_at": "2023-08-11T08:27:00+07:00",
+            "feed_image": [
+              {
+                "id": 114,
+                "feed_id": 98,
+                "image_url": "images/feeds/6102023-08-11 08:27:00.jpg",
+                "created_at": "2023-08-11T01:27:00.000000Z",
+                "updated_at": "2023-08-11T01:27:00.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 101,
+            "user_id": 61,
+            "description": null,
+            "location": null,
+            "created_at": "2023-08-11T09:01:34+07:00",
+            "updated_at": "2023-08-11T09:01:34+07:00",
+            "feed_image": [
+              {
+                "id": 117,
+                "feed_id": 101,
+                "image_url": "images/feeds/6102023-08-11 09:01:34.jpg",
+                "created_at": "2023-08-11T02:01:34.000000Z",
+                "updated_at": "2023-08-11T02:01:34.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 102,
+            "user_id": 61,
+            "description": "LOREM IPSUM DOLOREM LOREM IPSUM DOLOREM LOREM IPSUM DOLOREM",
+            "location": "Tanjung Barat, 12530, Jagakarsa, Jakarta, Indonesia",
+            "created_at": "2023-08-11T19:57:19+07:00",
+            "updated_at": "2023-08-11T19:57:19+07:00",
+            "feed_image": [
+              {
+                "id": 118,
+                "feed_id": 102,
+                "image_url": "images/feeds/6102023-08-11 19:57:19.jpg",
+                "created_at": "2023-08-11T12:57:19.000000Z",
+                "updated_at": "2023-08-11T12:57:19.000000Z"
+              },
+              {
+                "id": 119,
+                "feed_id": 102,
+                "image_url": "images/feeds/6112023-08-11 19:57:19.jpg",
+                "created_at": "2023-08-11T12:57:19.000000Z",
+                "updated_at": "2023-08-11T12:57:19.000000Z"
+              },
+              {
+                "id": 120,
+                "feed_id": 102,
+                "image_url": "images/feeds/6122023-08-11 19:57:19.jpg",
+                "created_at": "2023-08-11T12:57:19.000000Z",
+                "updated_at": "2023-08-11T12:57:19.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 103,
+            "user_id": 61,
+            "description": "Last data",
+            "location": "Bandung Barat, West Java, Indonesia",
+            "created_at": "2023-08-12T06:41:37+07:00",
+            "updated_at": "2023-08-12T06:41:37+07:00",
+            "feed_image": [
+              {
+                "id": 121,
+                "feed_id": 103,
+                "image_url": "images/feeds/6102023-08-12 06:41:37.jpg",
+                "created_at": "2023-08-11T23:41:37.000000Z",
+                "updated_at": "2023-08-11T23:41:37.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 104,
+            "user_id": 61,
+            "description": "Last data",
+            "location": "Bandung Barat, West Java, Indonesia",
+            "created_at": "2023-08-12T06:43:18+07:00",
+            "updated_at": "2023-08-12T06:43:18+07:00",
+            "feed_image": [
+              {
+                "id": 122,
+                "feed_id": 104,
+                "image_url": "images/feeds/6102023-08-12 06:43:18.jpg",
+                "created_at": "2023-08-11T23:43:18.000000Z",
+                "updated_at": "2023-08-11T23:43:18.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 105,
+            "user_id": 61,
+            "description": "Last data",
+            "location": "Bandung Barat, West Java, Indonesia",
+            "created_at": "2023-08-12T06:44:07+07:00",
+            "updated_at": "2023-08-12T06:44:07+07:00",
+            "feed_image": [
+              {
+                "id": 123,
+                "feed_id": 105,
+                "image_url": "images/feeds/6102023-08-12 06:44:07.jpg",
+                "created_at": "2023-08-11T23:44:07.000000Z",
+                "updated_at": "2023-08-11T23:44:07.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 106,
+            "user_id": 61,
+            "description": "lst 2",
+            "location": "Skyland, Puncak Skyland, Jayapura, Papua 99224, Indonesia",
+            "created_at": "2023-08-12T06:47:05+07:00",
+            "updated_at": "2023-08-12T06:47:05+07:00",
+            "feed_image": [
+              {
+                "id": 124,
+                "feed_id": 106,
+                "image_url": "images/feeds/6102023-08-12 06:47:05.jpg",
+                "created_at": "2023-08-11T23:47:05.000000Z",
+                "updated_at": "2023-08-11T23:47:05.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 107,
+            "user_id": 61,
+            "description": "lasst",
+            "location": "Surabaya, East Java, Indonesia",
+            "created_at": "2023-08-12T07:13:16+07:00",
+            "updated_at": "2023-08-12T07:13:16+07:00",
+            "feed_image": [
+              {
+                "id": 125,
+                "feed_id": 107,
+                "image_url": "images/feeds/6102023-08-12 07:13:16.jpg",
+                "created_at": "2023-08-12T00:13:16.000000Z",
+                "updated_at": "2023-08-12T00:13:16.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 108,
+            "user_id": 61,
+            "description": "lasst",
+            "location": "Surabaya, East Java, Indonesia",
+            "created_at": "2023-08-12T07:18:22+07:00",
+            "updated_at": "2023-08-12T07:18:22+07:00",
+            "feed_image": [
+              {
+                "id": 126,
+                "feed_id": 108,
+                "image_url": "images/feeds/6102023-08-12 07:18:22.jpg",
+                "created_at": "2023-08-12T00:18:22.000000Z",
+                "updated_at": "2023-08-12T00:18:22.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 109,
+            "user_id": 61,
+            "description": "kslsk",
+            "location": "Jakarta Airport Hotel, Terminal 2E, Tangerang, Banten 15126, Indonesia",
+            "created_at": "2023-08-12T07:43:36+07:00",
+            "updated_at": "2023-08-12T07:43:36+07:00",
+            "feed_image": [
+              {
+                "id": 127,
+                "feed_id": 109,
+                "image_url": "images/feeds/6102023-08-12 07:43:36.jpg",
+                "created_at": "2023-08-12T00:43:36.000000Z",
+                "updated_at": "2023-08-12T00:43:36.000000Z"
+              }
+            ],
+            "feeds_likes": [],
+            "feeds_saves": []
+          },
+          {
+            "id": 110,
+            "user_id": 61,
+            "description": "jskdkd",
+            "location": "Jakarta International Velodrome, Jl. Pemuda No. 6, Jakarta, 13220, Indonesia",
+            "created_at": "2023-08-12T07:49:13+07:00",
+            "updated_at": "2023-08-12T07:49:13+07:00",
+            "feed_image": [
+              {
+                "id": 128,
+                "feed_id": 110,
+                "image_url": "images/feeds/6102023-08-12 07:49:13.jpg",
+                "created_at": "2023-08-12T00:49:13.000000Z",
+                "updated_at": "2023-08-12T00:49:13.000000Z"
+              }
+            ],
+            "feeds_likes": [
+              {
+                "id": 39,
+                "feed_id": 110,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:16.000000Z",
+                "updated_at": "2023-08-12T13:48:16.000000Z"
+              }
+            ],
+            "feeds_saves": [
+              {
+                "id": 33,
+                "feed_id": 110,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:16.000000Z",
+                "updated_at": "2023-08-12T13:48:16.000000Z"
+              }
+            ]
+          },
+          {
+            "id": 111,
+            "user_id": 61,
+            "description": "heloo",
+            "location": "West Sumatra, Indonesia",
+            "created_at": "2023-08-12T07:53:17+07:00",
+            "updated_at": "2023-08-12T07:53:17+07:00",
+            "feed_image": [
+              {
+                "id": 129,
+                "feed_id": 111,
+                "image_url": "images/feeds/6102023-08-12 07:53:17.jpg",
+                "created_at": "2023-08-12T00:53:17.000000Z",
+                "updated_at": "2023-08-12T00:53:17.000000Z"
+              }
+            ],
+            "feeds_likes": [
+              {
+                "id": 38,
+                "feed_id": 111,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:14.000000Z",
+                "updated_at": "2023-08-12T13:48:14.000000Z"
+              }
+            ],
+            "feeds_saves": [
+              {
+                "id": 32,
+                "feed_id": 111,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:14.000000Z",
+                "updated_at": "2023-08-12T13:48:14.000000Z"
+              }
+            ]
+          },
+          {
+            "id": 112,
+            "user_id": 61,
+            "description": "Hello",
+            "location": "Jakabaring, Palembang, South Sumatra, Indonesia",
+            "created_at": "2023-08-12T08:00:33+07:00",
+            "updated_at": "2023-08-12T08:00:33+07:00",
+            "feed_image": [
+              {
+                "id": 130,
+                "feed_id": 112,
+                "image_url": "images/feeds/6102023-08-12 08:00:33.jpg",
+                "created_at": "2023-08-12T01:00:33.000000Z",
+                "updated_at": "2023-08-12T01:00:33.000000Z"
+              }
+            ],
+            "feeds_likes": [
+              {
+                "id": 37,
+                "feed_id": 112,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:12.000000Z",
+                "updated_at": "2023-08-12T13:48:12.000000Z"
+              }
+            ],
+            "feeds_saves": [
+              {
+                "id": 31,
+                "feed_id": 112,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:12.000000Z",
+                "updated_at": "2023-08-12T13:48:12.000000Z"
+              }
+            ]
+          },
+          {
+            "id": 113,
+            "user_id": 61,
+            "description": "heloo",
+            "location": "Jagalan, 57162, Jebres, Surakarta, Central Java, Indonesia",
+            "created_at": "2023-08-12T08:01:23+07:00",
+            "updated_at": "2023-08-12T08:01:23+07:00",
+            "feed_image": [
+              {
+                "id": 131,
+                "feed_id": 113,
+                "image_url": "images/feeds/6102023-08-12 08:01:23.jpg",
+                "created_at": "2023-08-12T01:01:23.000000Z",
+                "updated_at": "2023-08-12T01:01:23.000000Z"
+              }
+            ],
+            "feeds_likes": [
+              {
+                "id": 36,
+                "feed_id": 113,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:10.000000Z",
+                "updated_at": "2023-08-12T13:48:10.000000Z"
+              }
+            ],
+            "feeds_saves": [
+              {
+                "id": 30,
+                "feed_id": 113,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:10.000000Z",
+                "updated_at": "2023-08-12T13:48:10.000000Z"
+              }
+            ]
+          },
+          {
+            "id": 114,
+            "user_id": 61,
+            "description": "hello33",
+            "location": "Harjamukti, 16454, Cimanggis, Depok, West Java, Indonesia",
+            "created_at": "2023-08-12T08:04:16+07:00",
+            "updated_at": "2023-08-12T08:04:16+07:00",
+            "feed_image": [
+              {
+                "id": 132,
+                "feed_id": 114,
+                "image_url": "images/feeds/6102023-08-12 08:04:16.jpg",
+                "created_at": "2023-08-12T01:04:16.000000Z",
+                "updated_at": "2023-08-12T01:04:16.000000Z"
+              }
+            ],
+            "feeds_likes": [
+              {
+                "id": 15,
+                "feed_id": 114,
+                "user_id": 35,
+                "created_at": "2023-08-12T02:33:13.000000Z",
+                "updated_at": "2023-08-12T02:33:13.000000Z"
+              },
+              {
+                "id": 35,
+                "feed_id": 114,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:08.000000Z",
+                "updated_at": "2023-08-12T13:48:08.000000Z"
+              }
+            ],
+            "feeds_saves": [
+              {
+                "id": 29,
+                "feed_id": 114,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:08.000000Z",
+                "updated_at": "2023-08-12T13:48:08.000000Z"
+              }
+            ]
+          },
+          {
+            "id": 115,
+            "user_id": 61,
+            "description": "Hello ordddll",
+            "location": "Pancoran, 12780, Pancoran, Jakarta, Indonesia",
+            "created_at": "2023-08-12T11:10:15+07:00",
+            "updated_at": "2023-08-12T11:10:15+07:00",
+            "feed_image": [
+              {
+                "id": 133,
+                "feed_id": 115,
+                "image_url": "images/feeds/6102023-08-12 11:10:15.jpg",
+                "created_at": "2023-08-12T04:10:15.000000Z",
+                "updated_at": "2023-08-12T04:10:15.000000Z"
+              },
+              {
+                "id": 134,
+                "feed_id": 115,
+                "image_url": "images/feeds/6112023-08-12 11:10:15.jpg",
+                "created_at": "2023-08-12T04:10:15.000000Z",
+                "updated_at": "2023-08-12T04:10:15.000000Z"
+              }
+            ],
+            "feeds_likes": [
+              {
+                "id": 34,
+                "feed_id": 115,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:05.000000Z",
+                "updated_at": "2023-08-12T13:48:05.000000Z"
+              }
+            ],
+            "feeds_saves": [
+              {
+                "id": 28,
+                "feed_id": 115,
+                "user_id": 61,
+                "created_at": "2023-08-12T13:48:06.000000Z",
+                "updated_at": "2023-08-12T13:48:06.000000Z"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
