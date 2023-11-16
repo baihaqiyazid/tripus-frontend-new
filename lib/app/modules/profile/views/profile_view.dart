@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletons/skeletons.dart';
 import 'package:tripusfrontend/app/controllers/follow_controller.dart';
+import 'package:tripusfrontend/app/controllers/user_auth_controller.dart';
 import 'package:tripusfrontend/app/data/models/follow_model.dart';
 import 'package:tripusfrontend/app/data/models/user_model.dart';
 import 'package:tripusfrontend/app/helpers/avatar_custom.dart';
@@ -20,6 +21,7 @@ import '../../../data/models/follow_model.dart';
 import '../../../data/static_data.dart';
 import '../../../helpers/theme.dart';
 import '../../../routes/app_pages.dart';
+import '../../search-friends/views/search_friends_view.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends StatefulWidget {
@@ -34,12 +36,16 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
 
+  // User user = User.fromJson(GetStorage().read('user'));
   List<Follow> follow = StaticData.follows.where((element) => element.userId == StaticData.box.read('user')['id']).toList();
   bool isFollow = false;
+  
+  @override
   void initState(){
     super.initState();
     Get.lazyPut(() => MainProfileController());
     Get.lazyPut(() => HomePageController());
+    Get.lazyPut(() => UserAuthController());
 
     Future.delayed(Duration.zero, () async {
       Get.find<MainProfileController>().updateData(widget.users!.first.id!);
@@ -48,7 +54,6 @@ class _ProfileViewState extends State<ProfileView> {
 
     Get.lazyPut(() => FollowController());
     isFollow = follow.any((e) => e.followedUserId == widget.users!.first.id);
-
   }
 
   bool isTapFollowing = false;
@@ -69,8 +74,8 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
 
-    print(follow.length);
-
+    // print(follow.length);
+    log("user: ${widget.users!.first.toJson()}");
     String? name = widget.users!.first.name;
 
     String? userName = name != null ? toBeginningOfSentenceCase(name) : '';
@@ -155,10 +160,13 @@ class _ProfileViewState extends State<ProfileView> {
 
     Widget buttonMessage() {
       return Container(
+        margin: EdgeInsets.only(top: 15),
         child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.find<UserAuthController>().addNewConnection(widget.users!.first!.email!);
+            },
             splashRadius: 25,
-            icon: SvgPicture.asset('assets/icon_chat.svg')),
+            icon: Icon(Icons.wechat_sharp)),
       );
     }
 
@@ -168,7 +176,7 @@ class _ProfileViewState extends State<ProfileView> {
       return Container(
         margin: EdgeInsets.only(top: 15),
         child: IconButton(
-            onPressed: () => Get.toNamed(Routes.SEE_FOLLOW, arguments: widget.users!.first),
+            onPressed: () => Get.toNamed(Routes.SEARCH_FRIENDS, arguments: widget.users!.first),
             splashRadius: 25,
             icon: Icon(
               Icons.people_alt_rounded,
@@ -178,6 +186,8 @@ class _ProfileViewState extends State<ProfileView> {
     }
 
     Widget buttonFollow() {
+      // SearchFriendsView searchFriendsView = SearchFriendsView();
+      // searchFriendsView.refreshData();
       return Expanded(
         child: Container(
           margin: EdgeInsets.only(
@@ -201,6 +211,7 @@ class _ProfileViewState extends State<ProfileView> {
               setState(() {
                 isFollow = !isFollow;
               });
+
             },
             style: ButtonStyle(
               padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
@@ -329,6 +340,8 @@ class _ProfileViewState extends State<ProfileView> {
                             const SizedBox(
                               width: 14,
                             ),
+
+                            buttonMessage(),
                             seeFollow()
                           ],
                         ),

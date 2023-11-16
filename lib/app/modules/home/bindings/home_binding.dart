@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:tripusfrontend/app/controllers/feeds_controller.dart';
 import 'package:tripusfrontend/app/controllers/home_page_controller.dart';
+import 'package:tripusfrontend/app/modules/explore-share-cost/controllers/explore_share_cost_controller.dart';
 
 import '../../../controllers/user_auth_controller.dart';
 import '../controllers/home_controller.dart';
@@ -19,6 +20,9 @@ class HomeBinding extends Bindings {
     );
     Get.lazyPut<UserAuthController>(
           () => UserAuthController(),
+    );
+    Get.lazyPut<ExploreShareCostController>(
+          () => ExploreShareCostController(),
     );
   }
 }

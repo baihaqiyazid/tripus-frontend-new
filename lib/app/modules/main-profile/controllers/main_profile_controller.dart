@@ -15,7 +15,7 @@ class MainProfileController extends GetxController with StateMixin<dynamic> {
     change(null, status: RxStatus.loading());
 
     feedsUserLogged.assignAll(StaticData.feeds
-        .where((element) => element.userId == newIndexValue)
+        .where((element) => element.userId == newIndexValue && element.type != 'share cost')
         .toList());
 
     feedsLikeUserLogged.assignAll(StaticData.feeds.where((element) =>

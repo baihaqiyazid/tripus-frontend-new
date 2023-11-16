@@ -19,8 +19,10 @@ import 'package:tripusfrontend/app/routes/app_pages.dart';
 import '../../../controllers/order_controller.dart';
 import '../../../controllers/order_controller.dart';
 import '../../../controllers/order_controller.dart';
+import '../../../controllers/withdraw_controller.dart';
 import '../../../data/models/orders_model.dart';
 import '../../../data/models/user_model.dart';
+import '../../../data/models/withdraw_model.dart';
 import '../../../helpers/theme.dart';
 import '../controllers/history_transaction_controller.dart';
 
@@ -38,6 +40,8 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
     decimalDigits: 0,
   );
   List<FeedsHome> feeds =  StaticData.feeds.where((e) => e.type == 'open trip').where((element) => element.userId == StaticData.box.read('user')['id']).toList();
+  List<Withdraw> withdraws = StaticData.withdraws;
+
   RefreshController refreshC = RefreshController();
 
   @override
@@ -45,7 +49,9 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
     super.initState();
     Get.lazyPut(() => OrderController());
     Get.lazyPut(() => HomePageController());
+    Get.lazyPut(() => WithdrawController());
   }
+
 
   void refreshData() async {
     try {
@@ -66,6 +72,7 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
     await Get.find<OrderController>().getOrdersByEmail();
     await Get.find<OrderController>().getOrdersByAgent();
     await Get.find<HomePageController>().getData();
+    await Get.find<WithdrawController>().getAllWithdraw();
   }
 
   void loadData() async {
@@ -294,7 +301,7 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Column(
@@ -302,11 +309,11 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.check_circle_outline_rounded,
                             color: Colors.green,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -322,16 +329,16 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.check_circle_outline_rounded,
                             color: Colors.green,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -345,7 +352,7 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
@@ -402,7 +409,7 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Container(
@@ -417,7 +424,7 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
                                     color: textHintColor,
                                     fontWeight: semibold),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Container(
                                 width: 140,
                                 child: Row(
@@ -926,7 +933,7 @@ class _HistoryTransactionViewState extends State<HistoryTransactionView> {
               SizedBox(
                 height: 50,
               ),
-              StaticData.box.read('user')['role'] == 'open trip' ? ContentWidget(feeds: feeds,) :
+              StaticData.box.read('user')['role'] == 'open trip' ? ContentWidget(feeds: feeds, withdraws: withdraws, refreshData: refreshData,) :
               Column(
                 children: orders.map((e) => content(e)).toList(),
               )

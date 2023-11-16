@@ -11,4 +11,11 @@ class HomePageProvider extends GetConnect {
     return response;
   }
 
+  Future<Response> getDataShareCost() async {
+    final response = await get(
+      url + '/share-cost/get',
+    );
+    return response;
+  }
+
 }

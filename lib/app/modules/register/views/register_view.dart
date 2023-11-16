@@ -9,12 +9,26 @@ import '../../../helpers/loading_widget.dart';
 import '../../../helpers/theme.dart';
 import '../controllers/register_controller.dart';
 
-class RegisterView extends GetView<RegisterController> {
+class RegisterView extends StatefulWidget {
   RegisterView({Key? key}) : super(key: key);
 
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
   String message = "null";
 
   bool hasNavigatedToVerify = false;
+
+  RegisterController controller = Get.find<RegisterController>();
+  bool showPassword = false;
+
+  @override
+  void initState(){
+    super.initState();
+    Get.lazyPut(() => RegisterController());
+  }
 
   Timer? _timer;
 
@@ -132,15 +146,28 @@ class RegisterView extends GetView<RegisterController> {
               height: 10,
             ),
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(0),
               decoration: BoxDecoration(
                   border: Border.all(color: textSecondaryColor),
                   borderRadius: BorderRadius.circular(9)),
               child: TextFormField(
                 controller: controller.password,
-                obscureText: true,
+                obscureText: showPassword ? false : true,
                 style: primaryTextStyle,
-                decoration: InputDecoration.collapsed(
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        splashRadius: 25,
+                        iconSize: 20,
+                        onPressed: (){
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                        icon: Icon(
+                            showPassword ?  Icons.visibility_off : Icons.visibility
+                        )
+                    ),
+                    border: InputBorder.none,
                     hintText: "password",
                     hintStyle: hintTextStyle.copyWith(
                       fontSize: 14,

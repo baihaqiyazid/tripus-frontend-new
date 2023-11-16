@@ -39,7 +39,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
       await OrdersProvider()
           .getOrdersByEmail()
           .then((response) {
-        print("response : ${response.body}");
         if (response.statusCode == 400) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -51,7 +50,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
             StaticData.orders.clear();
             for(var i = 0; i<response.body['data'].length; i++){
               if(StaticData.orders.any((element) => element.id == response.body['data'][i]['id'])){
-                print('pass');
               }else {
                 var data = Orders.fromJson(
                     response.body['data'][i]);
@@ -65,11 +63,8 @@ class OrderController extends GetxController with StateMixin<dynamic>{
               await Get.find<HomePageController>().getData();
             });
 
-            print(StaticData.orders.length);
             change(StaticData.orders, status: RxStatus.success());
-            print("success get data order");
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           }
         }
@@ -77,7 +72,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }
@@ -88,7 +82,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
       await OrdersProvider()
           .getDataOrderAgent()
           .then((response) {
-        print("response agent: ${response.body}");
         if (response.statusCode == 400) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -100,19 +93,14 @@ class OrderController extends GetxController with StateMixin<dynamic>{
             StaticData.ordersAgent.clear();
 
             for(var i = 0; i<response.body['data'].length; i++){
-                print('start add 2');
                 var data = OrdersAgent.fromJson(
                     response.body['data'][i]);
                 StaticData.ordersAgent.add(data);
                 // print(data.toJson());
-              print('end add');
             }
 
-            print(StaticData.ordersAgent.length);
             change(null, status: RxStatus.success());
-            print("success get data order agent");
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           }
         }
@@ -120,7 +108,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }
@@ -131,7 +118,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
       await OrdersProvider()
           .cancelPayment(orderId)
           .then((response) {
-        print("response : ${response.body}");
         if (response.statusCode == 400) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -141,9 +127,7 @@ class OrderController extends GetxController with StateMixin<dynamic>{
         } else if (response.statusCode == 200) {
           try {
             change(StaticData.orders, status: RxStatus.success());
-            print("success cancel payment");
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           }
         }
@@ -151,7 +135,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }
@@ -187,8 +170,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
           feedId
         )
             .then((response) {
-          print("response : ${response.body}");
-          print("response : ${response.statusCode}");
           if (response.statusCode == 400) {
             String errors = response.body['data']['errors'];
             responseStatusError(null, errors, RxStatus.error());
@@ -198,15 +179,11 @@ class OrderController extends GetxController with StateMixin<dynamic>{
           } else if (response.statusCode == 200) {
             try {
               var data = Orders.fromJson(response.body['data']['order']);
-              print("data json: ${data.toJson()}");
               getOrdersByEmail();
-              print("static data: ${StaticData.orders.length}");
               change(null, status: RxStatus.success());
-              print("success create orders");
               Get.offNamed(Routes.HISTORY_TRANSACTION);
 
             } catch (e) {
-              print(e.toString());
               change(null, status: RxStatus.error());
             } finally {
               change(null, status: RxStatus.empty());
@@ -219,7 +196,6 @@ class OrderController extends GetxController with StateMixin<dynamic>{
           responseStatusError(null, e.toString(), RxStatus.error());
         });
       } catch (e) {
-        print(e.toString());
         change(null, status: RxStatus.error());
       } finally {
         change(null, status: RxStatus.empty());

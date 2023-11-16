@@ -25,7 +25,6 @@ class _RadioListBankState extends State<RadioListBank> {
   List<Map<String, String>> banks = [
     {"image": "logo_bca.png", "name": "Bank BCA", "code": "BCA"},
     {"image": "logo_bni.png", "name": "Bank BNI", "code": "BNI"},
-    {"image": "logo_mandiri.png", "name": "Bank Mandiri", "code": "Mandiri"},
   ];
 
   @override

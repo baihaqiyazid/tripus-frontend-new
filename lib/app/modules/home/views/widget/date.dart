@@ -23,7 +23,7 @@ class _DateWidgetState extends State<DateWidget> {
       child: Container(
         margin: EdgeInsets.only(bottom: 10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(

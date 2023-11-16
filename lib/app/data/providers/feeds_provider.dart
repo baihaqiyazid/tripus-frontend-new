@@ -100,6 +100,63 @@ class FeedsProvider extends GetConnect {
     }
   }
 
+  Future<Response> createShareCost(
+      String token,
+      String title,
+      String description,
+      String location,
+      List<File> images,
+      String others,
+      String dateStart,
+      String dateEnd,
+      double fee,
+      List<int> join
+      ) async {
+    // print("images1: ${images[1]}");
+    // print("images1: ${images[1].path}");
+    // print("images1: ${images[1].runtimeType}");
+    try{
+      var formData = FormData({
+        'title': title,
+        'description': description,
+        'location': location,
+        'others': others,
+        'date_start': dateStart,
+        'date_end': dateEnd,
+        'fee': fee,
+      });
+
+      try{
+        images.forEach((image) {
+          formData.files.add(MapEntry('images[]', MultipartFile(image, filename: 'file.${image.path.split('.').last}')));
+        });
+      }catch(e){
+        print(e.toString());
+      }
+
+      try{
+        join.forEach((val) {
+          formData.fields.add(MapEntry('join[]', val.toString()));
+        });
+      }catch(e){
+        print(e.toString());
+      }
+
+      print(join);
+      print(formData.fields.last);
+
+      final response = await post(
+          url + '/share-cost/create',
+          formData,
+          headers: {'Authorization': token}
+      );
+      return response;
+    }catch(e){
+      print(e.toString());
+      return Response();
+    }
+  }
+
   Future<Response> like(String token, int feedId) async {
     try{
       final response = await post(

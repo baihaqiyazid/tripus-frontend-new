@@ -8,7 +8,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tripusfrontend/app/controllers/home_page_controller.dart';
+import 'package:tripusfrontend/app/helpers/custom_refresh.dart';
+import 'package:tripusfrontend/app/modules/explore-share-cost/controllers/explore_share_cost_controller.dart';
 import 'package:tripusfrontend/app/modules/home/views/post_feeds_view.dart';
+import 'package:tripusfrontend/app/modules/home/views/share_cost_view.dart';
 import 'package:tripusfrontend/app/modules/home/views/widget/feeds_widget.dart';
 
 import '../../../controllers/user_auth_controller.dart';
@@ -33,19 +36,21 @@ class _HomeViewState extends State<HomeView> {
   var homePageController = Get.find<HomePageController>();
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    Get.lazyPut(() => HomePageController());
+    Get.lazyPut<ExploreShareCostController>(
+          () => ExploreShareCostController(),
+    );
+    homePageController = Get.find<HomePageController>();
+    refreshData();
   }
 
   void refreshData() async {
     try {
-      print("refresh");
       await Future.delayed(Duration(seconds: 1));
       StaticData.feeds.clear();
       await initData();
       setState(() {});
-      print( StaticData.feeds.length);
       refreshC.refreshCompleted();
     } catch (e) {
       refreshC.refreshFailed();
@@ -58,7 +63,6 @@ class _HomeViewState extends State<HomeView> {
 
   void loadData() async {
     try {
-      print("load ulang");
       if (StaticData.feeds.length >= StaticData.feeds.length+1) {
         // stop gaada user di database .... sudah abis datanya
         refreshC.loadNoData();
@@ -74,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    log("user: ${box['name']}");
+    log("data feeds home: ${StaticData.feeds.length}");
     Widget category() {
       return Container(
         child: Row(
@@ -114,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
             // SHARE COST
             Expanded(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.toNamed(Routes.EXPLORE_SHARE_COST),
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
                     EdgeInsets.symmetric(
@@ -159,7 +163,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () => Get.to(() => PostShareCostView()),
             child: Text(
               'Share Cost',
               style: primaryTextStylePlusJakartaSans.copyWith(
@@ -178,24 +182,69 @@ class _HomeViewState extends State<HomeView> {
         children: [
           GestureDetector(
             onTap: () {
-              Get.back();
-              Get.to(() => PostFeedsView(
+              log(box['payment_account'].toString());
+              if(box['status'] == 'accept'){
+                if(GetStorage().read('payment_account') != null){
+                  Get.back();
+                  Get.to(() => PostFeedsView(
                     typePost: 'open trip',
                   ));
+                }else {
+                  Get.defaultDialog(
+                      title: 'Alert',
+                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                      content:Text.rich(
+                        TextSpan(
+                          text: 'Sorry, you haven\'t added your payment account. ',
+                          style: primaryTextStylePlusJakartaSans.copyWith(fontSize: 15),
+                          children: [
+                            TextSpan(
+                              text: '\n\n Please add it to ',
+                              style: TextStyle(fontWeight: FontWeight.bold), // Atur gaya teks sesuai kebutuhan
+                            ),
+                            TextSpan(
+                              text: '\n profile -> settings -> payment account',
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic, // Atur gaya teks sesuai kebutuhan
+                              ),
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                  );
+                }
+              }else{
+                Get.defaultDialog(
+                  title: 'Alert',
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                  content: Text("Sorry, you can't post an open trip yet because your approval letter is still in the review stage.",
+                    style: primaryTextStylePlusJakartaSans.copyWith(
+                      fontSize: 15
+                    ),
+                    textAlign: TextAlign.justify,
+                  )
+                );
+              }
+
             },
-            child: Text(
-              'Open Trip',
-              style: primaryTextStylePlusJakartaSans.copyWith(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: Row(
+              children: [
+                Text(
+                  'Open Trip',
+                  style: primaryTextStylePlusJakartaSans.copyWith(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            )
           ),
           GestureDetector(
             onTap: () {
               Get.back();
               Get.to(() => PostFeedsView(
-                    typePost: 'feed',
+                    typePost: 'feeds',
                   ));
             },
             child: Text(
@@ -245,33 +294,10 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
         backgroundColor: backgroundColor,
         body: SafeArea(
-          child: SmartRefresher(
-            controller: refreshC,
-            enablePullDown: true,
-            enablePullUp: true,
-            onRefresh: refreshData,
-            footer: CustomFooter(
-              builder: (context, mode) {
-                if (mode == LoadStatus.idle) {
-                  return Center(child: Text("Load more"));
-                } else if (mode == LoadStatus.loading) {
-                  return Center(
-                    child: SizedBox(
-                      width: 50,
-                      height: 50,
-                      child:  CupertinoActivityIndicator()
-                    ),
-                  );
-                } else if (mode == LoadStatus.failed) {
-                  return Center(child: Text("Load Failed!Click retry!"));
-                } else if (mode == LoadStatus.canLoading) {
-                  return Center(child: Text("release to load more"));
-                } else {
-                  return Center();
-                }
-              },
-            ),
-            onLoading: loadData,
+          child: CustomRefresh(
+            refreshController: refreshC,
+            refreshData: refreshData,
+            loadData: loadData,
             child: CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
@@ -292,7 +318,6 @@ class _HomeViewState extends State<HomeView> {
                       child: box['profile_photo_path'] == null
                           ? IconButton(
                               onPressed: () {
-                                print('tap');
                                 Get.toNamed(Routes.MAIN_PROFILE,
                                     parameters: {'id': box['id'].toString()});
                               },
@@ -329,7 +354,7 @@ class _HomeViewState extends State<HomeView> {
                     child: Column(
                       children: [
                         const SizedBox(
-                          height: 20,
+                          height: 5,
                         ),
                         ListView.builder(
                           shrinkWrap: true,

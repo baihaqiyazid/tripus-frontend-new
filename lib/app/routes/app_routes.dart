@@ -25,6 +25,13 @@ abstract class Routes {
   static const HISTORY_TRANSACTION = _Paths.HISTORY_TRANSACTION;
   static const AGENT_DETAIL_TRANSACTION = _Paths.AGENT_DETAIL_TRANSACTION;
   static const SEE_FOLLOW = _Paths.SEE_FOLLOW;
+  static const SEARCH_FRIENDS = _Paths.SEARCH_FRIENDS;
+  static const SEE_FOLLOWING = _Paths.SEE_FOLLOWING;
+  static const CHAT_ROOM = _Paths.CHAT_ROOM;
+  static const SPLIT_BILL = _Paths.SPLIT_BILL;
+  static const REVIEW_SUMMARY_SHARE_COST = _Paths.REVIEW_SUMMARY_SHARE_COST;
+  static const EXPLORE_SHARE_COST = _Paths.EXPLORE_SHARE_COST;
+  static const SHARE_COST_POST_DETAIL = _Paths.SHARE_COST_POST_DETAIL;
 }
 
 abstract class _Paths {
@@ -51,4 +58,11 @@ abstract class _Paths {
   static const HISTORY_TRANSACTION = '/history-transaction';
   static const AGENT_DETAIL_TRANSACTION = '/agent-detail-transaction';
   static const SEE_FOLLOW = '/see-follow';
+  static const SEARCH_FRIENDS = '/search-friends';
+  static const SEE_FOLLOWING = '/see-following';
+  static const CHAT_ROOM = '/chat-room';
+  static const SPLIT_BILL = '/split-bill';
+  static const REVIEW_SUMMARY_SHARE_COST = '/review-summary-share-cost';
+  static const EXPLORE_SHARE_COST = '/explore-share-cost';
+  static const SHARE_COST_POST_DETAIL = '/share-cost-post-detail';
 }

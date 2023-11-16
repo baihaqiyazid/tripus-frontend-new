@@ -40,9 +40,7 @@ class _SelectedBankState extends State<SelectedBank> {
                 Row(
                   children: [
                     Image.asset(
-                      widget.selectedBank == 'BCA'? 'assets/payment/logo_bca.png' :
-                      widget.selectedBank == 'BNI'? 'assets/payment/logo_bni.png' :
-                      'assets/payment/logo_mandiri.png',
+                      widget.selectedBank == 'BCA'? 'assets/payment/logo_bca.png' : 'assets/payment/logo_bni.png',
                       width: 30,
                       height: 30,
                     ),

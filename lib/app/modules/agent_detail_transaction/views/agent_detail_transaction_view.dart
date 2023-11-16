@@ -571,7 +571,7 @@ class _AgentDetailTransactionViewState extends State<AgentDetailTransactionView>
                             fontWeight: semibold),
                       ),
                       Text(
-                        formatter.format(order.totalPrice).toString(),
+                        formatter.format(order.totalPrice! - 6000).toString(),
                         style: primaryTextStylePlusJakartaSans.copyWith(
                             fontSize: 16,
                             color: textButtonSecondaryColor,

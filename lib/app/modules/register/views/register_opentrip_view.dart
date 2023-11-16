@@ -27,6 +27,8 @@ class _RegisterOpenTripViewState extends State<RegisterOpenTripView> {
 
   String fileName = '';
 
+  bool showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     handleRegister(String message) {
@@ -129,7 +131,7 @@ class _RegisterOpenTripViewState extends State<RegisterOpenTripView> {
 
     Widget passwordInput() {
       return Container(
-        margin: const EdgeInsets.only(top: 10, bottom: 10),
+        margin: const EdgeInsets.only(top: 10, bottom: 28),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -141,15 +143,28 @@ class _RegisterOpenTripViewState extends State<RegisterOpenTripView> {
               height: 10,
             ),
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(0),
               decoration: BoxDecoration(
                   border: Border.all(color: textSecondaryColor),
                   borderRadius: BorderRadius.circular(9)),
               child: TextFormField(
                 controller: controller.password,
-                obscureText: true,
+                obscureText: showPassword ? false : true,
                 style: primaryTextStyle,
-                decoration: InputDecoration.collapsed(
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                        splashRadius: 25,
+                        iconSize: 20,
+                        onPressed: (){
+                          setState(() {
+                            showPassword = !showPassword;
+                          });
+                        },
+                        icon: Icon(
+                            showPassword ?  Icons.visibility_off : Icons.visibility
+                        )
+                    ),
+                    border: InputBorder.none,
                     hintText: "password",
                     hintStyle: hintTextStyle.copyWith(
                       fontSize: 14,

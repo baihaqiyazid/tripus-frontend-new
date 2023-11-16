@@ -30,7 +30,6 @@ class _ExploreViewState extends State<ExploreView> {
 
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -112,6 +111,8 @@ class _ExploreViewState extends State<ExploreView> {
   List<FeedsHome> feeds =
   StaticData.feeds.where((feed) => feed.type == 'open trip').toList();
 
+  List<FeedsHome> feedsBanner =
+  StaticData.feeds.where((feed) => feed.type == 'open trip').toList();
 
   Widget buttonCategory(String name, String image) {
     return ElevatedButton(
@@ -190,7 +191,6 @@ class _ExploreViewState extends State<ExploreView> {
     Widget header() {
       return Stack(
         children: [
-          feeds.isNotEmpty ?
           SizedBox(
             width: Get.size.width,
             height: Get.size.height * 0.55,
@@ -210,12 +210,12 @@ class _ExploreViewState extends State<ExploreView> {
                 bottom: 40,
               ),
               onEnd: _onEnd,
-              cardsCount: feeds.length,
+              cardsCount: feedsBanner.length,
               cardsBuilder: (BuildContext context, int index) {
-                final image = feeds[index].feedImage!.first.imageUrl;
+                final image = feedsBanner[index].feedImage!.first.imageUrl;
                 return GestureDetector(
                   onTap: () => Get.toNamed(Routes.FEED_DETAIL,
-                      parameters: {'id': feeds[index].id.toString()}),
+                      parameters: {'id': feedsBanner[index].id.toString()}),
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(50),
@@ -269,7 +269,7 @@ class _ExploreViewState extends State<ExploreView> {
                                       )),
                                   Spacer(),
                                   Text(
-                                    feeds[index].title!,
+                                    feedsBanner[index].title!,
                                     style: primaryTextStyle.copyWith(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -288,7 +288,7 @@ class _ExploreViewState extends State<ExploreView> {
                                     ),
                                   ),
                                   Text(
-                                    feeds[index].location!,
+                                    feedsBanner[index].location!,
                                     style: primaryTextStyle.copyWith(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -315,7 +315,7 @@ class _ExploreViewState extends State<ExploreView> {
                 );
               },
             ),
-          ) : Container(),
+          ),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
@@ -640,7 +640,6 @@ class _ExploreViewState extends State<ExploreView> {
         child: Column(
           children: [
             header(),
-            feeds.isNotEmpty ?
             GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: Padding(
@@ -651,7 +650,16 @@ class _ExploreViewState extends State<ExploreView> {
                     children: [
                       category(),
                       wishlist(),
-                      contentFeeds(),
+                      feeds.isNotEmpty ?
+                      contentFeeds() : Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: Text("Sorry, what you are looking for doesn't exist", style: primaryTextStylePlusJakartaSans.copyWith(
+                              fontSize: 16, overflow: TextOverflow.fade
+                            ),textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: Get.size.height * 0.15,
                       ),
@@ -659,11 +667,7 @@ class _ExploreViewState extends State<ExploreView> {
                   ),
                 ),
               ),
-            ) : Center(
-              child: Text("Sorry, what you are looking for doesn't exist", style: primaryTextStylePlusJakartaSans.copyWith(
-                fontSize: 22, overflow: TextOverflow.fade
-              ),),
-            ),
+            )
           ],
         ),
       ),

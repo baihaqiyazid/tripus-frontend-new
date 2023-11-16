@@ -10,8 +10,23 @@ import '../../../helpers/loading_widget.dart';
 import '../../../helpers/theme.dart';
 import '../controllers/login_controller.dart';
 
-class LoginView extends GetView<LoginController> {
+class LoginView extends StatefulWidget {
   LoginView({Key? key}) : super(key: key);
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+
+  LoginController controller = Get.find<LoginController>();
+  bool showPassword = false;
+
+  @override
+  void initState(){
+    super.initState();
+    Get.lazyPut(() => LoginController());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +53,33 @@ class LoginView extends GetView<LoginController> {
     Widget passwordInput() {
       return Container(
         margin: EdgeInsets.symmetric(horizontal: 30),
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.only(left: 12),
         decoration: BoxDecoration(
             border: Border.all(color: textSecondaryColor),
             borderRadius: BorderRadius.circular(9)),
         child: TextFormField(
           controller: controller.password,
           style: primaryTextStyle,
-          obscureText: true,
-          decoration: InputDecoration.collapsed(
+          obscureText: showPassword ? false: true,
+          decoration: InputDecoration(
               hintText: "password",
               hintStyle: hintTextStyle.copyWith(
                 fontSize: 14,
-              )),
+              ),
+              border: InputBorder.none,
+              suffixIcon: IconButton(
+                  splashRadius: 25,
+                  iconSize: 20,
+                  onPressed: (){
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                  icon: Icon(
+                     showPassword ?  Icons.visibility_off : Icons.visibility
+                  )
+              )
+          ),
           textAlign: TextAlign.start,
         ),
       );
@@ -61,6 +90,7 @@ class LoginView extends GetView<LoginController> {
         margin: EdgeInsets.only(top: 16, left: 30, right: 30),
         child: ElevatedButton(
           onPressed: () {
+
             Get.find<UserAuthController>().login(controller.email.text, controller.password.text);
           },
           style: ButtonStyle(

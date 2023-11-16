@@ -8,8 +8,12 @@ import '../modules/change-password/bindings/change_password_binding.dart';
 import '../modules/change-password/views/change_password_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
+import '../modules/chat_room/bindings/chat_room_binding.dart';
+import '../modules/chat_room/views/chat_room_view.dart';
 import '../modules/edit-profile/bindings/edit_profile_binding.dart';
 import '../modules/edit-profile/views/edit_profile_view.dart';
+import '../modules/explore-share-cost/bindings/explore_share_cost_binding.dart';
+import '../modules/explore-share-cost/views/explore_share_cost_view.dart';
 import '../modules/explore/bindings/explore_binding.dart';
 import '../modules/explore/views/explore_view.dart';
 import '../modules/feed_detail/bindings/feed_detail_binding.dart';
@@ -37,10 +41,20 @@ import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_opentrip_view.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/review-summary-share-cost/bindings/review_summary_share_cost_binding.dart';
+import '../modules/review-summary-share-cost/views/review_summary_share_cost_view.dart';
+import '../modules/search-friends/bindings/search_friends_binding.dart';
+import '../modules/search-friends/views/search_friends_view.dart';
 import '../modules/see-follow/bindings/see_follow_binding.dart';
 import '../modules/see-follow/views/see_follow_view.dart';
+import '../modules/see-following/bindings/see_following_binding.dart';
+import '../modules/see-following/views/see_following_view.dart';
+import '../modules/share-cost-post-detail/bindings/share_cost_post_detail_binding.dart';
+import '../modules/share-cost-post-detail/views/share_cost_post_detail_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/split_bill/bindings/split_bill_binding.dart';
+import '../modules/split_bill/views/split_bill_view.dart';
 import '../modules/verify/bindings/verify_binding.dart';
 import '../modules/verify/views/verify_view.dart';
 
@@ -104,7 +118,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => const ChatView(),
+      page: () => ChatView(),
       binding: ChatBinding(),
     ),
     GetPage(
@@ -161,6 +175,41 @@ class AppPages {
       name: _Paths.SEE_FOLLOW,
       page: () => const SeeFollowView(),
       binding: SeeFollowBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH_FRIENDS,
+      page: () => const SearchFriendsView(),
+      binding: SearchFriendsBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEE_FOLLOWING,
+      page: () => const SeeFollowingView(),
+      binding: SeeFollowingBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_ROOM,
+      page: () => ChatRoomView(),
+      binding: ChatRoomBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLIT_BILL,
+      page: () => SplitBillView(),
+      binding: SplitBillBinding(),
+    ),
+    GetPage(
+      name: _Paths.REVIEW_SUMMARY_SHARE_COST,
+      page: () => ReviewSummaryShareCostView(),
+      binding: ReviewSummaryShareCostBinding(),
+    ),
+    GetPage(
+      name: _Paths.EXPLORE_SHARE_COST,
+      page: () => const ExploreShareCostView(),
+      binding: ExploreShareCostBinding(),
+    ),
+    GetPage(
+      name: _Paths.SHARE_COST_POST_DETAIL,
+      page: () => const ShareCostPostDetailView(),
+      binding: ShareCostPostDetailBinding(),
     ),
   ];
 }

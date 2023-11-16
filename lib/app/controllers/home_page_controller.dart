@@ -1,9 +1,9 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:tripusfrontend/app/data/models/feeds_home_model.dart';
 import 'package:tripusfrontend/app/data/static_data.dart';
 
-import '../data/models/feeds_model.dart';
-import '../data/models/user_model.dart';
 import '../data/providers/home_page_provider.dart';
 import '../helpers/dialog_widget.dart';
 
@@ -32,7 +32,6 @@ class HomePageController extends GetxController with StateMixin<List<FeedsHome>>
         await HomePageProvider()
             .getData()
             .then((response) {
-          print("response : ${response.body}");
           if (response.statusCode == 400) {
             String errors = response.body['data']['errors'];
             responseStatusError(null, errors, RxStatus.error());
@@ -44,7 +43,6 @@ class HomePageController extends GetxController with StateMixin<List<FeedsHome>>
               StaticData.feeds.clear();
               for(var i = 0; i<response.body['data']['feeds'].length; i++){
                 if(StaticData.feeds.any((element) => element.id == response.body['data']['feeds'][i]['id'])){
-                  print('pass');
 
                 }else {
                   var data = FeedsHome.fromJson(
@@ -53,11 +51,9 @@ class HomePageController extends GetxController with StateMixin<List<FeedsHome>>
                   // print(data.toJson());
                 }
               }
-              print(StaticData.feeds.length);
+              log("feeds controller: ${StaticData.feeds.length}");
               change(StaticData.feeds, status: RxStatus.success());
-              print("success get data");
             } catch (e) {
-              print(e.toString());
               change(null, status: RxStatus.error());
             }
           }
@@ -65,7 +61,6 @@ class HomePageController extends GetxController with StateMixin<List<FeedsHome>>
           responseStatusError(null, e.toString(), RxStatus.error());
         });
       } catch (e) {
-        print(e.toString());
         change(null, status: RxStatus.error());
       }
   }

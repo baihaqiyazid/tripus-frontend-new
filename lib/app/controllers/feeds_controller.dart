@@ -1,17 +1,17 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tripusfrontend/app/data/providers/feeds_provider.dart';
-import 'package:tripusfrontend/app/modules/home/controllers/home_controller.dart';
+import 'package:tripusfrontend/app/modules/explore-share-cost/controllers/explore_share_cost_controller.dart';
+import 'package:tripusfrontend/app/routes/app_pages.dart';
 
 import '../data/models/feeds_home_model.dart';
 import '../data/models/feeds_model.dart';
 import '../data/static_data.dart';
 import '../helpers/dialog_widget.dart';
-import 'package:flutter/material.dart';
 
 import 'home_page_controller.dart';
 
@@ -24,6 +24,7 @@ class FeedsController extends GetxController with StateMixin<Feed> {
   void onInit() {
     change(null, status: RxStatus.empty());
     super.onInit();
+    Get.lazyPut(() => ExploreShareCostController());
   }
 
   void responseStatusError(data, message, status) {
@@ -40,17 +41,17 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         FeedsProvider()
             .create(userAuth['token'], description, location, images)
             .then((response) {
-          print("resposne : ${response.body}");
-          print("resposne : ${response.statusCode}");
+              print("response: ${response.body}");
           if (response.statusCode == 400) {
-            String errors = response.body['data']['errors'];
-            responseStatusError(null, errors, RxStatus.error());
+            dynamic errors = response.body['data']['errors'];
+            // print(errors[0]);
+            responseStatusError(null, 'Sorry, the Image format doesn\'t support', RxStatus.empty());
+          } else if(response.body == null){
+            dialogError('Sorry, the Image format doesn\'t support');
           } else if (response.statusCode == 500) {
             change(null, status: RxStatus.error());
             dialogError('Sorry, Internal Server Error!');
           } else if (response.statusCode == 200) {
-            print('userAuth[id]: ${userAuth['id']}');
-            print('userAuth[id]: ${userAuth['id'].runtimeType}');
             try {
               var data = FeedsHome.fromJson(response.body['data'][0]);
               data.user = UserHome(
@@ -59,19 +60,13 @@ class FeedsController extends GetxController with StateMixin<Feed> {
                 profilePhotoPath: userAuth['profilePhotoPath'],
               );
 
-              print("data json: ${data.toJson()}");
               StaticData.feeds.add(data);
-              print("static data: ${StaticData.feeds.last.user}");
               change(null, status: RxStatus.success());
-              print("success create feeds");
               Get.lazyPut(() => HomePageController());
               Future.delayed(Duration.zero, () async{
                 await Get.find<HomePageController>().getData();
               }).then((value) => Get.offNamed('/home'));
-
-
             } catch (e) {
-              print(e.toString());
               change(null, status: RxStatus.error());
             } finally {
               change(null, status: RxStatus.empty());
@@ -81,7 +76,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
           responseStatusError(null, e.toString(), RxStatus.error());
         });
       } catch (e) {
-        print(e.toString());
         change(null, status: RxStatus.error());
       }
     }
@@ -149,17 +143,14 @@ class FeedsController extends GetxController with StateMixin<Feed> {
           maxPerson,
         )
             .then((response) {
-          print("resposne : ${response.body}");
-          print("resposne : ${response.statusCode}");
+              print("response: ${response.body}");
           if (response.statusCode == 400) {
-            String errors = response.body['data']['errors'];
-            responseStatusError(null, errors, RxStatus.error());
+            dynamic errors = response.body['data']['errors'];
+            responseStatusError(null, 'Sorry, the Image format doesn\'t support', RxStatus.empty());
           } else if (response.statusCode == 500) {
             change(null, status: RxStatus.error());
             dialogError('Sorry, Internal Server Error!');
           } else if (response.statusCode == 200) {
-            print('userAuth[id]: ${userAuth['id']}');
-            print('userAuth[id]: ${userAuth['id'].runtimeType}');
             try {
               var data = FeedsHome.fromJson(response.body['data'][0]);
               data.user = UserHome(
@@ -168,18 +159,14 @@ class FeedsController extends GetxController with StateMixin<Feed> {
                 profilePhotoPath: userAuth['profilePhotoPath'],
               );
 
-              print("data json: ${data.toJson()}");
               StaticData.feeds.add(data);
-              print("static data: ${StaticData.feeds.last.user}");
               change(null, status: RxStatus.success());
-              print("success create trips");
               Get.lazyPut(() => HomePageController());
               Future.delayed(Duration.zero, () async{
                 await Get.find<HomePageController>().getData();
               }).then((value) => Get.offNamed('/home'));
 
             } catch (e) {
-              print(e.toString());
               change(null, status: RxStatus.error());
             } finally {
               change(null, status: RxStatus.empty());
@@ -189,7 +176,82 @@ class FeedsController extends GetxController with StateMixin<Feed> {
           responseStatusError(null, e.toString(), RxStatus.error());
         });
       } catch (e) {
-        print(e.toString());
+        change(null, status: RxStatus.error());
+      }
+    }
+  }
+
+  Future<dynamic> createShareCost(
+      String title,
+      String description,
+      String location,
+      List<File> images,
+      String others,
+      String dateStart,
+      String dateEnd,
+      double fee,
+      List<int> join
+      ) async {
+    if (images.isEmpty) {
+      dialogError("images required");
+    } else if (title == ''){
+      dialogError("title field required");
+    } else if (location == ''){
+      dialogError("location field required");
+    } else if (dateStart == '' || dateEnd == ''){
+      dialogError("date field required");
+    } else if (fee == 0.0){
+      dialogError("fee field required");
+    } else {
+      change(null, status: RxStatus.loading());
+      try {
+        FeedsProvider()
+            .createShareCost(
+          userAuth['token'],
+          title,
+          description,
+          location,
+          images,
+          others,
+          dateStart,
+          dateEnd,
+          fee,
+          join
+        )
+            .then((response) {
+          print("response: ${response.body}");
+          if (response.statusCode == 400) {
+            dynamic errors = response.body['data']['errors'];
+            responseStatusError(null, 'Sorry, the Image format doesn\'t support', RxStatus.empty());
+          } else if (response.statusCode == 500) {
+            change(null, status: RxStatus.error());
+            dialogError('Sorry, Internal Server Error!');
+          } else if (response.statusCode == 200) {
+            try {
+              var data = FeedsHome.fromJson(response.body['data'][0]);
+              data.user = UserHome(
+                id: userAuth['id'],
+                name: userAuth['name'],
+                profilePhotoPath: userAuth['profilePhotoPath'],
+              );
+
+              Get.find<ExploreShareCostController>().shareCostFeeds.add(data);
+              change(null, status: RxStatus.success());
+              Get.lazyPut(() => HomePageController());
+              Future.delayed(Duration.zero, () async{
+                await Get.find<HomePageController>().getData();
+              }).then((value) => Get.offNamed(Routes.EXPLORE_SHARE_COST));
+
+            } catch (e) {
+              change(null, status: RxStatus.error());
+            } finally {
+              change(null, status: RxStatus.empty());
+            }
+          }
+        }, onError: (e) {
+          responseStatusError(null, e.toString(), RxStatus.error());
+        });
+      } catch (e) {
         change(null, status: RxStatus.error());
       }
     }
@@ -199,8 +261,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
     change(null, status: RxStatus.loading());
     try {
       FeedsProvider().like(userAuth['token'], feedId).then((response) {
-        print("resposne : ${response.body}");
-        print("resposne : ${response.statusCode}");
         if (response.statusCode == 400) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -210,20 +270,12 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         } else if (response.statusCode == 200) {
           try {
             var data = FeedsHomeLikes.fromJson(response.body['data']['feed']);
-            print(data.toJson());
-
             var feedToModify = StaticData.feeds.firstWhere(
               (element) => element.id == feedId,
             );
-
-            if (feedToModify != null) {
-              feedToModify.feedsLikes?.add(data);
-            }
-
-            change(null, status: RxStatus.success());
-            print("success like feeds");
+            feedToModify.feedsLikes?.add(data);
+                      change(null, status: RxStatus.success());
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           } finally {
             change(null, status: RxStatus.empty());
@@ -233,7 +285,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }
@@ -242,8 +293,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
     change(null, status: RxStatus.loading());
     try {
       FeedsProvider().deleteLike(userAuth['token'], feedId).then((response) {
-        print("resposne : ${response.body}");
-        print("resposne : ${response.statusCode}");
         if (response.statusCode == 404) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -256,15 +305,11 @@ class FeedsController extends GetxController with StateMixin<Feed> {
               (element) => element.id == feedId,
             );
 
-            if (feedToModify != null) {
-              feedToModify.feedsLikes!
-                  .removeWhere((element) => element.feedId == feedId);
-            }
+            feedToModify.feedsLikes!
+                .removeWhere((element) => element.feedId == feedId);
 
             change(null, status: RxStatus.success());
-            print("success delete feeds like");
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           } finally {
             change(null, status: RxStatus.empty());
@@ -274,7 +319,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }
@@ -283,8 +327,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
     change(null, status: RxStatus.loading());
     try {
       FeedsProvider().save(userAuth['token'], feedId).then((response) {
-        print("resposne : ${response.body}");
-        print("resposne : ${response.statusCode}");
         if (response.statusCode == 400) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -294,20 +336,13 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         } else if (response.statusCode == 200) {
           try {
             var data = FeedsHomeLikes.fromJson(response.body['data']['feed']);
-            print(data.toJson());
             // Find the feed with the specified feedId
             var feedToModify = StaticData.feeds.firstWhere(
               (element) => element.id == feedId,
             );
-
-            if (feedToModify != null) {
-              feedToModify.feedsSaves?.add(data);
-            }
-
-            change(null, status: RxStatus.success());
-            print("success like feeds");
+            feedToModify.feedsSaves?.add(data);
+                      change(null, status: RxStatus.success());
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           } finally {
             change(null, status: RxStatus.empty());
@@ -317,7 +352,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }
@@ -326,8 +360,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
     change(null, status: RxStatus.loading());
     try {
       FeedsProvider().deleteSave(userAuth['token'], feedId).then((response) {
-        print("resposne : ${response.body}");
-        print("resposne : ${response.statusCode}");
         if (response.statusCode == 404) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -340,15 +372,11 @@ class FeedsController extends GetxController with StateMixin<Feed> {
               (element) => element.id == feedId,
             );
 
-            if (feedToModify != null) {
-              feedToModify.feedsSaves!
-                  .removeWhere((element) => element.userId == userAuth['id']);
-            }
+            feedToModify.feedsSaves!
+                .removeWhere((element) => element.userId == userAuth['id']);
 
             change(null, status: RxStatus.success());
-            print("success delete feeds like");
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           } finally {
             change(null, status: RxStatus.empty());
@@ -358,7 +386,6 @@ class FeedsController extends GetxController with StateMixin<Feed> {
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
   }

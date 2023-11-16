@@ -26,7 +26,8 @@ class LandingSignupView extends GetView {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 590, bottom: 17),
+                      width: double.infinity,
+                      margin: EdgeInsets.only(left: 30, right: 30, top: 590, bottom: 17),
                       child: ElevatedButton(
                         onPressed: () => Get.toNamed('/register-agent'),
                         style: ButtonStyle(
@@ -48,27 +49,31 @@ class LandingSignupView extends GetView {
                         ),),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/register');
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                          EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 135), // Set the desired padding values
-                        ),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(17), // Set the desired border radius
+                    Container(
+                      width: double.infinity,
+                      margin: EdgeInsets.only(left: 30, right: 30),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                            EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 135), // Set the desired padding values
                           ),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(17), // Set the desired border radius
+                            ),
+                          ),
+                          backgroundColor:
+                          MaterialStateProperty.all<Color>(backgroundColor),
                         ),
-                        backgroundColor:
-                        MaterialStateProperty.all<Color>(backgroundColor),
+                        child: Text("Traveler", style: buttonSecondaryTextStyle.copyWith(
+                            fontSize: 22, fontWeight: FontWeight.w600
+                        ),),
                       ),
-                      child: Text("Traveler", style: buttonSecondaryTextStyle.copyWith(
-                          fontSize: 22, fontWeight: FontWeight.w600
-                      ),),
                     ),
                   ],
                 ),

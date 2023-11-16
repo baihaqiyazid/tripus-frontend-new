@@ -68,7 +68,6 @@ class _EditProfileViewState extends State<EditProfileView> {
         }
       });
     }
-
     Get.back();
   }
 
@@ -517,7 +516,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                             : user.email,
                         bio: controller.bio.text != ''
                             ? controller.bio.text
-                            : user.bio,
+                            : user.bio ?? '',
                         links: controller.links.text != ''
                             ? controller.links.text
                             : user.links,

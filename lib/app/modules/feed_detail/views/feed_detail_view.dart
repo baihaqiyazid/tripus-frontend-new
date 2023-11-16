@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _FeedDetailViewState extends State<FeedDetailView> {
   int feedLikeLength = 0;
   int person = 0;
 
+
   var formatter = NumberFormat.currency(locale: 'id_ID', symbol: '', decimalDigits: 0,);
 
   @override
@@ -65,15 +67,18 @@ class _FeedDetailViewState extends State<FeedDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    if(feeds!.cancelTrip!.isNotEmpty){
-      print(feeds?.cancelTrip?.first.toJson());
-    }
+    // if(feeds!.cancelTrip!.isNotEmpty){
+    //   print(feeds?.cancelTrip?.first.toJson());
+    // }
 
     // print('id param ${Get.parameters.id}');
     print("arg: ${Get.arguments}");
     print("param: ${int.parse(Get.parameters['id'] ?? '0')}");
     String? name = feeds!.user!.name;
     String? userName = name != null ? toBeginningOfSentenceCase(name) : '';
+
+    DateTime currentTime = DateTime.now();
+    // log("time: ${endTime.isBefore(currentTime)}");
 
     List<Widget> imageSliders = feeds!.feedImage!
         .map((item) => Container(
@@ -343,6 +348,8 @@ class _FeedDetailViewState extends State<FeedDetailView> {
     }
 
     Widget contentTrip() {
+      DateTime endTime = DateTime.parse(feeds!.dateEnd!);
+
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -353,7 +360,7 @@ class _FeedDetailViewState extends State<FeedDetailView> {
           SizedBox(
             height: 30,
           ),
-          StaticData.box.read('user')['role'] != 'open trip' ?
+          endTime.isAfter(currentTime) && StaticData.box.read('user')['role'] != 'open trip' ?
           buttonBook() : Container(),
           SizedBox(
             height: 10,

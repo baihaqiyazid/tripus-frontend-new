@@ -128,7 +128,7 @@ class _AddPaymentBottomSheetState extends State<AddPaymentBottomSheet> {
                       headerBottomSheet("Choose Bank Account", Icon(Icons.keyboard_arrow_up, color: textHintColor, size: 30,)),
                       SizedBox(height: 23),
                       RadioListBank(onBankSelected: _handleBankSelected, selectedValue: selectedBank),
-                      SizedBox(height: 23),
+                      SizedBox(height: 80),
                       Container(
                         margin: EdgeInsets.only(bottom: 20),
                         child: button('Continue', 1, handleButtonAddBank),

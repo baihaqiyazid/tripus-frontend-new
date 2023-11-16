@@ -1,18 +1,20 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
-import 'package:tripusfrontend/app/data/static_data.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:tripusfrontend/app/data/models/follow_model.dart';
+import 'package:tripusfrontend/app/modules/chat/controllers/chat_controller.dart';
+
 import 'package:tripusfrontend/app/modules/chat/views/chat_view.dart';
 import 'package:tripusfrontend/app/modules/home/views/home_view.dart';
 import 'package:tripusfrontend/app/modules/notif/views/notif_view.dart';
+import 'package:tripusfrontend/app/modules/search-friends/views/search_friends_view.dart';
 
 import '../../../helpers/theme.dart';
-import '../../../routes/app_pages.dart';
-import '../../explore/views/explore_view.dart';
-import '../controllers/main_page_controller.dart';
+
 
 class MainPageView extends StatefulWidget {
   late int currentIndex;
@@ -23,173 +25,85 @@ class MainPageView extends StatefulWidget {
 }
 
 class _MainPageViewState extends State<MainPageView> {
-  Widget navigation() {
-    return Container(
-      height: 80,
-      margin: const EdgeInsets.only(bottom: 30, right: 27, left: 27),
-      color: Colors.transparent,
-      child: Stack(
-        children: [
-          BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 0.0,
-              sigmaY: 4.0,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(right: 0, left: 0, top: 13),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(23),
-                border: Border.all(color: Colors.white.withOpacity(0.13)),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    //begin color
-                    Colors.white.withOpacity(0.8),
-                    //end color
-                    Colors.white.withOpacity(0.8),
-                  ],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2), // Shadow color
-                    offset: Offset(0, 2), // Shadow offset
-                    blurRadius: 5, // Shadow blur radius
-                    spreadRadius: 0, // Shadow spread radius
-                  ),
-                ]),
-            child: BottomNavigationBar(
-              elevation: 0,
-              onTap: (value) {
-                setState(() {
-                  widget.currentIndex = value;
-                });
-              },
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.transparent,
-              items: [
-                BottomNavigationBarItem(
-                    icon: Column(
-                      children: [
-                        SvgPicture.asset('assets/icon_home.svg',
-                            color: widget.currentIndex == 0
-                                ? textButtonSecondaryColor
-                                : bottomNavigationColor),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        widget.currentIndex == 0
-                            ? ClipOval(
-                                child: Container(
-                                  width: 5,
-                                  height: 5,
-                                  color: textButtonSecondaryColor,
-                                ),
-                              )
-                            : Container()
-                      ],
-                    ),
-                    label: ''),
-                BottomNavigationBarItem(
-                    icon: Column(
-                      children: [
-                        SvgPicture.asset('assets/icon_love.svg',
-                            color: widget.currentIndex == 1
-                                ? textButtonSecondaryColor
-                                : bottomNavigationColor),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        widget.currentIndex == 1
-                            ? ClipOval(
-                                child: Container(
-                                  width: 5,
-                                  height: 5,
-                                  color: textButtonSecondaryColor,
-                                ),
-                              )
-                            : Container()
-                      ],
-                    ),
-                    label: ''),
-                BottomNavigationBarItem(
-                    icon: Column(
-                      children: [
-                        SvgPicture.asset('assets/icon_notification.svg',
-                            color: widget.currentIndex == 2
-                                ? textButtonSecondaryColor
-                                : bottomNavigationColor),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        widget.currentIndex == 2
-                            ? ClipOval(
-                                child: Container(
-                                  width: 5,
-                                  height: 5,
-                                  color: textButtonSecondaryColor,
-                                ),
-                              )
-                            : Container()
-                      ],
-                    ),
-                    label: ''),
-                BottomNavigationBarItem(
-                    icon: Column(
-                      children: [
-                        SvgPicture.asset('assets/icon_chat.svg',
-                            color: widget.currentIndex == 3
-                                ? textButtonSecondaryColor
-                                : bottomNavigationColor),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        widget.currentIndex == 3
-                            ? ClipOval(
-                                child: Container(
-                                  width: 5,
-                                  height: 5,
-                                  color: textButtonSecondaryColor,
-                                ),
-                              )
-                            : Container()
-                      ],
-                    ),
-                    label: ''),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+
+  PersistentTabController controller = PersistentTabController(initialIndex: 0);
+
+  @override
+  void initState(){
+    super.initState();
+    Get.lazyPut( () => ChatController());
+    controller = PersistentTabController(initialIndex: widget.currentIndex);
   }
 
-  Widget body() {
-    switch (widget.currentIndex) {
-      case 0:
-        return HomeView();
-      case 1:
-        return ExploreView();
-      case 2:
-        return NotifView();
-      case 3:
-        return ChatView();
-      default:
-        return HomeView();
-    }
+  List<Widget> _buildScreens() {
+    return [
+      HomeView(),
+      SearchFriendsView(),
+      NotifView(),
+      ChatView(),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.home),
+        title: ("Home"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.person_2),
+        title: ("Friends"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.bell),
+        title: ("Notification"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.chat_bubble_2),
+        title: ("Chat"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      body: Stack(
-        children: [
-          body(),
-          Align(alignment: Alignment.bottomCenter, child: navigation())
-        ],
+    return PersistentTabView(
+      context,
+      controller: controller,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
       ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle: NavBarStyle.style12, // Choose the nav bar style with this property.
     );
   }
 }
+
+

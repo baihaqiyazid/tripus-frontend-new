@@ -19,29 +19,34 @@ class User {
   String? updatedAt;
   String? role;
   String? file;
+  String? status;
   String? profilePhotoUrl;
+  List<ChatUser>? chats;
 
-  User(
-      {this.id,
-        this.name,
-        this.username,
-        this.email,
-        this.address,
-        this.token,
-        this.emailVerifiedAt,
-        this.birthdate,
-        this.bio,
-        this.links,
-        this.phoneNumber,
-        this.otpCode,
-        this.twoFactorConfirmedAt,
-        this.currentTeamId,
-        this.profilePhotoPath,
-        this.createdAt,
-        this.updatedAt,
-        this.role,
-        this.file,
-        this.profilePhotoUrl});
+
+  User({this.id,
+    this.name,
+    this.username,
+    this.email,
+    this.address,
+    this.token,
+    this.emailVerifiedAt,
+    this.birthdate,
+    this.bio,
+    this.links,
+    this.phoneNumber,
+    this.otpCode,
+    this.twoFactorConfirmedAt,
+    this.currentTeamId,
+    this.profilePhotoPath,
+    this.createdAt,
+    this.updatedAt,
+    this.role,
+    this.file,
+    this.status,
+    this.profilePhotoUrl,
+    this.chats,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'] != null ? int.tryParse(json['id'].toString()) : null;
@@ -63,6 +68,7 @@ class User {
     updatedAt = json['updated_at'];
     role = json['role'];
     file = json['file'];
+    status = json['status'];
     profilePhotoUrl = json['profile_photo_url'];
   }
 
@@ -80,6 +86,7 @@ class User {
     data['bio'] = bio;
     data['links'] = links;
     data['file'] = file;
+    data['status'] = status;
     data['phone_number'] = phoneNumber;
     data['otp_code'] = otpCode;
     data['profile_photo_path'] = profilePhotoPath;
@@ -89,4 +96,32 @@ class User {
     data['profile_photo_url'] = profilePhotoUrl;
     return data;
   }
+}
+
+class ChatUser {
+  ChatUser({
+    this.connection,
+    this.chatId,
+    this.lastTime,
+    this.total_unread,
+  });
+
+  String? connection;
+  String? chatId;
+  String? lastTime;
+  int? total_unread;
+
+  factory ChatUser.fromJson(Map<String, dynamic> json) => ChatUser(
+    connection: json["connection"],
+    chatId: json["chat_id"],
+    lastTime: json["lastTime"],
+    total_unread: json["total_unread"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "connection": connection,
+    "chat_id": chatId,
+    "lastTime": lastTime,
+    "total_unread": total_unread,
+  };
 }

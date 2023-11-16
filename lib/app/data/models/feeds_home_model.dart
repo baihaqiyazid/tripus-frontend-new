@@ -21,7 +21,7 @@ class FeedsHome {
   List<FeedImage>? feedImage;
   List<FeedsHomeLikes>? feedsLikes;
   List<FeedsHomeLikes>? feedsSaves;
-  List<FeedsHomeLikes>? feedsJoin;
+  List<FeedsHomeJoins>? feedsJoin;
   List<CancelTrip>? cancelTrip;
   List<WithdrawTrip>? withdrawTrip;
 
@@ -91,9 +91,9 @@ class FeedsHome {
       });
     }
     if (json['feeds_join'] != null) {
-      feedsJoin = <FeedsHomeLikes>[];
+      feedsJoin = <FeedsHomeJoins>[];
       json['feeds_join'].forEach((v) {
-        feedsJoin?.add(FeedsHomeLikes.fromJson(v));
+        feedsJoin?.add(FeedsHomeJoins.fromJson(v));
       });
     }
     if (json['cancel_trip'] != null) {
@@ -300,6 +300,38 @@ class FeedsHomeLikes {
     data['id'] = id;
     data['feed_id'] = feedId;
     data['user_id'] = userId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class FeedsHomeJoins {
+  int? id;
+  int? feedId;
+  int? userId;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  FeedsHomeJoins(
+      {this.id, this.feedId, this.userId, this.status, this.createdAt, this.updatedAt});
+
+  FeedsHomeJoins.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    feedId = json['feed_id'];
+    userId = json['user_id'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['feed_id'] = feedId;
+    data['user_id'] = userId;
+    data['status'] = status;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

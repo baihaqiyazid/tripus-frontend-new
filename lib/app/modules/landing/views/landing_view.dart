@@ -49,27 +49,30 @@ class LandingView extends GetView<LandingController> {
                           ),),
                         ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LandingSignupView()));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                            EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 135), // Set the desired padding values
-                          ),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.circular(17), // Set the desired border radius
+                      Container(
+
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LandingSignupView()));
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                              EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 135), // Set the desired padding values
                             ),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.circular(17), // Set the desired border radius
+                              ),
+                            ),
+                            backgroundColor:
+                            MaterialStateProperty.all<Color>(backgroundColor),
                           ),
-                          backgroundColor:
-                          MaterialStateProperty.all<Color>(backgroundColor),
+                          child: Text("Sign Up", style: buttonSecondaryTextStyle.copyWith(
+                              fontSize: 22, fontWeight: FontWeight.w600
+                          ),),
                         ),
-                        child: Text("Sign Up", style: buttonSecondaryTextStyle.copyWith(
-                            fontSize: 22, fontWeight: FontWeight.w600
-                        ),),
                       ),
                     ],
                   ),

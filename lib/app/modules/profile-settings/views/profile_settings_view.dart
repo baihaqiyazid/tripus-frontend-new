@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tripusfrontend/app/controllers/user_auth_controller.dart';
 import 'package:tripusfrontend/app/routes/app_pages.dart';
 
@@ -37,32 +38,38 @@ class ProfileSettingsView extends GetView<ProfileSettingsController> {
         margin: EdgeInsets.only(left: 40, right: 40, top: 37, bottom: 20),
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
-              child: Row(
-                children: [
-                  Icon(Icons.key_rounded, size: 25,),
-                  SizedBox(width: 10,),
-                  Text('Change Password', style: primaryTextStylePlusJakartaSans.copyWith(
-                    fontWeight: semibold, fontSize: 14
-                  ),)
-                ],
-              ),
+            // GestureDetector(
+            //   onTap: () => Get.toNamed(Routes.CHANGE_PASSWORD),
+            //   child: Row(
+            //     children: [
+            //       Icon(Icons.key_rounded, size: 25,),
+            //       SizedBox(width: 10,),
+            //       Text('Change Password', style: primaryTextStylePlusJakartaSans.copyWith(
+            //         fontWeight: semibold, fontSize: 14
+            //       ),)
+            //     ],
+            //   ),
+            // ),
+            // SizedBox(height: 28,),
+            GetStorage().read('user')['role'] != 'open trip'?
+                Container() :
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.PAYMENT_ACCOUNT),
+                  child: Row(
+                    children: [
+                      Icon(Icons.payments_rounded, size: 25,),
+                      SizedBox(width: 10,),
+                      Text('Payment Accounts', style: primaryTextStylePlusJakartaSans.copyWith(
+                          fontWeight: semibold, fontSize: 14
+                      ),)
+                    ],
+                  ),
+                ),
+                SizedBox(height: 28,),
+              ],
             ),
-            SizedBox(height: 28,),
-            GestureDetector(
-              onTap: () => Get.toNamed(Routes.PAYMENT_ACCOUNT),
-              child: Row(
-                children: [
-                  Icon(Icons.payments_rounded, size: 25,),
-                  SizedBox(width: 10,),
-                  Text('Payment Accounts', style: primaryTextStylePlusJakartaSans.copyWith(
-                      fontWeight: semibold, fontSize: 14
-                  ),)
-                ],
-              ),
-            ),
-            SizedBox(height: 28,),
             GestureDetector(
               onTap: () => Get.toNamed(Routes.HISTORY_TRANSACTION),
               child: Row(
@@ -76,10 +83,10 @@ class ProfileSettingsView extends GetView<ProfileSettingsController> {
               ),
             ),
             Spacer(),
-            Text('Delete Account', style: primaryTextStylePlusJakartaSans.copyWith(
-              fontWeight: semibold, fontSize: 14, color: Colors.red,
-            ),),
-            SizedBox(height: 12,),
+            // Text('Delete Account', style: primaryTextStylePlusJakartaSans.copyWith(
+            //   fontWeight: semibold, fontSize: 14, color: Colors.red,
+            // ),),
+            // SizedBox(height: 12,),
             InkWell(
               onTap: () {
                 Get.find<UserAuthController>().logout();

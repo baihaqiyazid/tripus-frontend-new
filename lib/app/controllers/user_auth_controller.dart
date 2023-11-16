@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tripusfrontend/app/controllers/order_controller.dart';
@@ -18,6 +19,8 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
 
   static var userAuth = GetStorage();
   List<Map<String, dynamic>> paymentAccountList = [];
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  var user = User().obs;
 
   @override
   void onInit() {
@@ -42,7 +45,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
     } else {
       change(null, status: RxStatus.loading());
       UserProvider().registerUser(name, password, email).then((response) {
-        print(response.body);
         if (response.statusCode == 400) {
           Map<String, dynamic> errors = response.body['data']['errors'];
           errors.forEach((field, messages) {
@@ -58,7 +60,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             data.token = response.body['data']['token_type'] +
                 ' ' +
                 response.body['data']['access_token'];
-            print(data.toJson());
             change(data, status: RxStatus.success());
             Get.toNamed('/verify', arguments: data.token);
           } catch (e) {
@@ -89,7 +90,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
       try {
         UserProvider().registerAgent(name, password, email, File(file)).then(
             (response) {
-          print(response.body);
           if (response.statusCode == 400) {
             Map<String, dynamic> errors = response.body['data']['errors'];
             errors.forEach((field, messages) {
@@ -105,31 +105,32 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
               data.token = response.body['data']['token_type'] +
                   ' ' +
                   response.body['data']['access_token'];
-              print(data.toJson());
               change(data, status: RxStatus.success());
               Get.toNamed('/verify', arguments: data.token);
             } catch (e) {
               change(null, status: RxStatus.error());
+            } finally{
+              change(null, status: RxStatus.empty());
             }
           }
+          change(null, status: RxStatus.empty());
         }, onError: (e) {
           responseStatusError(null, e.toString(), RxStatus.error());
         });
       } catch (e) {
-        print(e.toString());
-        change(null, status: RxStatus.error());
+      } finally {
+        change(null, status: RxStatus.empty());
       }
+
     }
   }
 
-  void verify(String otp, String token) {
+  Future verify(String otp, String token) async{
     if (otp == '') {
       dialogError("otp wrong");
     } else {
-      print("status: $status");
       change(null, status: RxStatus.loading());
-      UserProvider().verifyEmail(otp, token).then((response) {
-        print(response.body);
+      await UserProvider().verifyEmail(otp, token).then((response) async {
         if (response.statusCode == 400) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -140,8 +141,63 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
           try {
             var data = User.fromJson(response.body['data']['user']);
             data.token = token;
+            StaticData.users.add(data);
             userAuth.write('user', data.toJson());
-            print(data.toJson());
+
+            CollectionReference users = firestore.collection('users');
+
+            try{
+              await users.doc(data.email).set({
+                "id" : data.id,
+                "name" : data.name,
+                "email": data.email,
+                "token": data.token,
+                "role": data.role,
+                "profile_photo_path": data.profilePhotoPath,
+                "status": "",
+                "created_at": data.createdAt,
+              });
+
+
+              final currUser = await users.doc(data.email).get();
+              final currUserData = currUser.data() as Map<String, dynamic>;
+
+              user(User.fromJson(currUserData));
+
+              user.refresh();
+
+              final listChats =
+                  await users.doc(data.email).collection("chats").get();
+
+              if (listChats.docs.length != 0) {
+                List<ChatUser> dataListChats = [];
+                listChats.docs.forEach((element) {
+                  var dataDocChat = element.data();
+                  var dataDocChatId = element.id;
+                  dataListChats.add(ChatUser(
+                    chatId: dataDocChatId,
+                    connection: dataDocChat["connection"],
+                    lastTime: dataDocChat["lastTime"],
+                    total_unread: dataDocChat["total_unread"],
+                  ));
+                });
+
+                user.update((user) {
+                  user!.chats = dataListChats;
+                });
+              } else {
+                user.update((user) {
+                  user!.chats = [];
+                });
+              }
+
+              user.refresh();
+            }catch (e){
+              print("ERROR");
+              print(e.toString());
+            }
+
+
             change(data, status: RxStatus.success());
             Get.offAllNamed('/home');
           } catch (e) {
@@ -150,9 +206,11 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             change(null, status: RxStatus.empty());
           }
         }
+
       }, onError: (e) {
         responseStatusError(null, e.toString(), RxStatus.error());
       });
+      change(null, status: RxStatus.empty());
     }
   }
 
@@ -165,7 +223,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
       change(null, status: RxStatus.loading());
       try {
         UserProvider().login(email, password).then((response) {
-          print(response.body);
           if (response.statusCode == 400 ||
               response.statusCode == 401 ||
               response.statusCode == 404) {
@@ -181,8 +238,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
                   ' ' +
                   response.body['data']['access_token'];
               userAuth.write('user', data.toJson());
-              print("read storage ${userAuth.read('user')}");
-              print(data.toJson());
               Future.delayed(Duration.zero, () async{
                 await getAllPaymentAccountUsers();
                 await Get.find<OrderController>().getOrdersByEmail();
@@ -190,25 +245,21 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
               change(data, status: RxStatus.success());
               Get.offAllNamed('/home');
             } catch (e) {
-              print(e.toString());
               responseStatusError(null, e.toString(), RxStatus.error());
-            } finally {
-              change(null, status: RxStatus.empty());
             }
-          } else {}
+          }
         });
       } catch (e) {
         responseStatusError(null, e.toString(), RxStatus.error());
       }
+      change(null, status: RxStatus.empty());
     }
   }
 
   Future<dynamic> getAllUsers() async {
-    print('start');
     change(null, status: RxStatus.loading());
     try {
       await UserProvider().getAllUsers().then((response) {
-        print(response.body);
         if (response.statusCode == 400 ||
             response.statusCode == 401 ||
             response.statusCode == 404) {
@@ -226,18 +277,22 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             for (var i = 0; i < response.body['data']['user'].length; i++) {
               if (StaticData.users.any((element) =>
                   element.id == response.body['data']['user'][i]['id'])) {
-                print('pass');
               } else {
                 var data = User.fromJson(response.body['data']['user'][i]);
-                print(data.toJson());
                 StaticData.users.add(data);
                 // print(data.toJson());
               }
             }
-            print(StaticData.users.length);
+            if(userAuth.read('user') != null){
+              User userLogged = StaticData.users.where((element) => element.id == userAuth.read('user')['id']).first;
+              if (userLogged.id == userAuth.read('user')['id']){
+                userLogged.token = userAuth.read('user')['token'];
+                userAuth.write('user', userLogged.toJson());
+              }
+            }
+
             change(null, status: RxStatus.success());
           } catch (e) {
-            print(e.toString());
             responseStatusError(null, e.toString(), RxStatus.error());
           } finally {
             change(null, status: RxStatus.empty());
@@ -247,14 +302,15 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
     } catch (e) {
       responseStatusError(null, e.toString(), RxStatus.error());
     }
+    finally {
+      change(null, status: RxStatus.empty());
+    }
   }
 
   Future<dynamic> logout() async {
-    print('start');
     change(null, status: RxStatus.loading());
     try {
       await UserProvider().logout().then((response) {
-        print(response.body);
         if (response.statusCode == 400 ||
             response.statusCode == 401 ||
             response.statusCode == 404) {
@@ -269,7 +325,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             Get.offAllNamed(Routes.LOGIN);
             change(null, status: RxStatus.success());
           } catch (e) {
-            print(e.toString());
             responseStatusError(null, e.toString(), RxStatus.error());
           } finally {
             change(null, status: RxStatus.empty());
@@ -291,26 +346,29 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
       required dynamic profilePhotoPath,
       required dynamic backgroundImageUrl}) {
     change(null, status: RxStatus.loading());
-    print("token: ${userAuth.read('user')['token']}");
     UserProvider()
         .updateProfile(userAuth.read('user')['token'], name, email, bio, links,
             phone, birthdate, profilePhotoPath, backgroundImageUrl)
         .then((response) {
-      print(response.body);
+          print("update response: ${response.body}");
       if (response.statusCode == 400) {
         Map<String, dynamic> errors = response.body['data']['errors'];
         errors.forEach((field, messages) {
           String errorMessage = messages[0];
-          responseStatusError(null, errorMessage, RxStatus.error());
+          print(errorMessage);
+          if (errorMessage == 'The background image url field must be an image.' || errorMessage == 'The profile photo path field must be an image.'){
+            responseStatusError(null, 'Sorry, the Image format doesn\'t support', RxStatus.empty());
+          }else{
+            responseStatusError(null, errorMessage, RxStatus.empty());
+          }
         });
       } else if (response.statusCode == 500) {
-        change(null, status: RxStatus.error());
+        change(null, status: RxStatus.empty());
         dialogError('Sorry, Internal Server Error!');
       } else if (response.statusCode == 200) {
         try {
           var data = User.fromJson(response.body['data']['user']);
           data.token = userAuth.read('user')['token'];
-          print(data.toJson());
 
           GetStorage().remove('user');
           GetStorage().write('user', data.toJson());
@@ -324,7 +382,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
 
           change(data, status: RxStatus.success());
         } catch (e) {
-          print(e.toString());
           responseStatusError(null, e.toString(), RxStatus.error());
         } finally {
           change(null, status: RxStatus.empty());
@@ -332,20 +389,15 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
       } else {
         change(null, status: RxStatus.error());
       }
-    }, onError: (e) {
-      responseStatusError(null, e.toString(), RxStatus.error());
-    });
+    },);
   }
 
   Future<dynamic> addPaymentAccount(String paymentMethodId, String number) async {
-    print(userAuth.read('user')['token']);
     change(null, status: RxStatus.loading());
     await UserProvider()
         .addPaymentAccount(
             userAuth.read('user')['token'], paymentMethodId, number)
         .then((response) {
-      print(response.body);
-      print(response.statusCode);
       if (response.statusCode == 400) {
         Map<String, dynamic> errors = response.body['data']['errors'];
         errors.forEach((field, messages) {
@@ -361,11 +413,9 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
 
           StaticData.payment.add(data);
 
-          var paymentAccountListNew = StaticData.payment.map((payment) => payment.toJson()).toList();
-          print("len payemnt ctrl: ${paymentAccountListNew.length}");
+          var paymentAccountListNew = StaticData.payment.where((element) => element.userId == userAuth.read('user')['id']).map((payment) => payment.toJson()).toList();
           StaticData.box.write('payment_account', paymentAccountListNew);
 
-          print("success");
           change(paymentAccountListNew, status: RxStatus.success());
         } catch (e) {
           responseStatusError(null, e.toString(), RxStatus.error());
@@ -382,7 +432,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
     change(null, status: RxStatus.loading());
     try {
       await UserProvider().getAllPaymentUsers().then((response) {
-        print(response.body);
         if (response.statusCode == 400 ||
             response.statusCode == 401 ||
             response.statusCode == 404) {
@@ -397,12 +446,9 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             for (var i = 0; i < response.body['data']['payment'].length; i++) {
               if (StaticData.payment.any((element) =>
                   element.id == response.body['data']['payment'][i]['id'])) {
-                print('pass');
               } else {
-                print("START");
                 var data =
                     Payment.fromJson(response.body['data']['payment'][i]);
-                print("DATA: ${data.toJson()}");
                 StaticData.payment.add(data);
                 // print(data.toJson());
               }
@@ -416,10 +462,8 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             GetStorage().write('payment_account', paymentData);
 
 
-            print(StaticData.payment.length);
             change(paymentData, status: RxStatus.success());
           } catch (e) {
-            print(e.toString());
             responseStatusError(null, e.toString(), RxStatus.error());
           }
         } else {}
@@ -435,8 +479,6 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
       await UserProvider()
           .deletePaymentAccount(userAuth.read('user')['token'], paymentAccountId)
           .then((response) {
-        print("resposne : ${response.body}");
-        print("resposne : ${response.statusCode}");
         if (response.statusCode == 404) {
           String errors = response.body['data']['errors'];
           responseStatusError(null, errors, RxStatus.error());
@@ -453,9 +495,7 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
             StaticData.box.write('payment_account', paymentAccountList);
 
             change(paymentAccountList, status: RxStatus.success());
-            print("success delete payment account");
           } catch (e) {
-            print(e.toString());
             change(null, status: RxStatus.error());
           }
         }
@@ -463,8 +503,184 @@ class UserAuthController extends GetxController with StateMixin<dynamic> {
         responseStatusError(null, e.toString(), RxStatus.error());
       });
     } catch (e) {
-      print(e.toString());
       change(null, status: RxStatus.error());
     }
+  }
+
+  Future addNewConnection(String friendEmail) async {
+    bool flagNewConnection = false;
+    var chat_id;
+    User _currentUser = User.fromJson(GetStorage().read('user'));
+    String date = DateTime.now().toIso8601String();
+    CollectionReference chats = firestore.collection("chats");
+    CollectionReference users = firestore.collection("users");
+
+    final docChats =
+    await users.doc(_currentUser!.email).collection("chats").get();
+
+    if (docChats.docs.isNotEmpty) {
+      // user sudah pernah chat dengan siapapun
+      final checkConnection = await users
+          .doc(_currentUser!.email)
+          .collection("chats")
+          .where("connection", isEqualTo: friendEmail)
+          .get();
+
+      if (checkConnection.docs.isNotEmpty) {
+        // sudah pernah buat koneksi dengan => friendEmail
+        flagNewConnection = false;
+
+        //chat_id from chats collection
+        chat_id = checkConnection.docs[0].id;
+      } else {
+        // blm pernah buat koneksi dengan => friendEmail
+        // buat koneksi ....
+        flagNewConnection = true;
+      }
+    } else {
+      // blm pernah chat dengan siapapun
+      // buat koneksi ....
+      flagNewConnection = true;
+    }
+
+    if (flagNewConnection) {
+      // cek dari chats collection => connections => mereka berdua...
+      final chatsDocs = await chats.where(
+        "connections",
+        whereIn: [
+          [
+            _currentUser!.email,
+            friendEmail,
+          ],
+          [
+            friendEmail,
+            _currentUser!.email,
+          ],
+        ],
+      ).get();
+
+      if (chatsDocs.docs.isNotEmpty) {
+        // terdapat data chats (sudah ada koneksi antara mereka berdua)
+        final chatDataId = chatsDocs.docs[0].id;
+        final chatsData = chatsDocs.docs[0].data() as Map<String, dynamic>;
+
+        await users
+            .doc(_currentUser!.email)
+            .collection("chats")
+            .doc(chatDataId)
+            .set({
+          "connection": friendEmail,
+          "lastTime": chatsData["lastTime"],
+          "total_unread": 0,
+        });
+
+        final listChats =
+        await users.doc(_currentUser!.email).collection("chats").get();
+
+        if (listChats.docs.isNotEmpty) {
+          List<ChatUser> dataListChats = List<ChatUser>.empty();
+          for (var element in listChats.docs) {
+            var dataDocChat = element.data();
+            var dataDocChatId = element.id;
+            dataListChats.add(ChatUser(
+              chatId: dataDocChatId,
+              connection: dataDocChat["connection"],
+              lastTime: dataDocChat["lastTime"],
+              total_unread: dataDocChat["total_unread"],
+            ));
+          }
+          user.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          user.update((user) {
+            user!.chats = [];
+          });
+        }
+
+        chat_id = chatDataId;
+
+        user.refresh();
+      } else {
+        // buat baru , mereka berdua benar2 belum ada koneksi
+        final newChatDoc = await chats.add({
+          "connections": [
+            _currentUser!.email,
+            friendEmail,
+          ],
+        });
+
+        chats.doc(newChatDoc.id).collection("chat");
+
+        await users
+            .doc(_currentUser!.email)
+            .collection("chats")
+            .doc(newChatDoc.id)
+            .set({
+          "connection": friendEmail,
+          "lastTime": date,
+          "total_unread": 0,
+        });
+
+        final listChats =
+        await users.doc(_currentUser.email).collection("chats").get();
+
+        if (listChats.docs.isNotEmpty) {
+          List<ChatUser> dataListChats = List<ChatUser>.empty(growable: true); // Fix here
+          for (var element in listChats.docs) {
+            var dataDocChat = element.data();
+            var dataDocChatId = element.id;
+            dataListChats.add(ChatUser(
+              chatId: dataDocChatId,
+              connection: dataDocChat["connection"],
+              lastTime: dataDocChat["lastTime"],
+              total_unread: dataDocChat["total_unread"],
+            ));
+          }
+          user.update((user) {
+            user!.chats = dataListChats;
+          });
+        } else {
+          user.update((user) {
+            user!.chats = [];
+          });
+        }
+
+        chat_id = newChatDoc.id;
+
+        user.refresh();
+      }
+    }
+
+    print(chat_id);
+
+    final updateStatusChat = await chats
+        .doc(chat_id)
+        .collection("chat")
+        .where("isRead", isEqualTo: false)
+        .where("penerima", isEqualTo: _currentUser!.email)
+        .get();
+
+    updateStatusChat.docs.forEach((element) async {
+      await chats
+          .doc(chat_id)
+          .collection("chat")
+          .doc(element.id)
+          .update({"isRead": true});
+    });
+
+    await users
+        .doc(_currentUser!.email)
+        .collection("chats")
+        .doc(chat_id)
+        .update({"total_unread": 0});
+
+    Get.toNamed(
+      Routes.CHAT_ROOM,
+      arguments: {
+        "chat_id": "$chat_id",
+        "friendEmail": friendEmail,
+      },
+    );
   }
 }

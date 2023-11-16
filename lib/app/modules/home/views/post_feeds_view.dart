@@ -307,7 +307,7 @@ class _PostFeedsViewState extends State<PostFeedsView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.typePost == 'feed' ? "Description" : "Description *",
+            widget.typePost == 'feeds' ? "Description" : "Description *",
             style: primaryTextStylePlusJakartaSans.copyWith(
                 fontSize: 12, fontWeight: semibold),
           ),
@@ -345,7 +345,7 @@ class _PostFeedsViewState extends State<PostFeedsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.typePost == 'feed' ? "Location" : "Location *",
+              widget.typePost == 'feeds' ? "Location" : "Location *",
               style: primaryTextStylePlusJakartaSans.copyWith(
                 fontSize: 12,
                 fontWeight: semibold,
@@ -599,7 +599,7 @@ class _PostFeedsViewState extends State<PostFeedsView> {
                     print("dateStart: ${dateStart.text}");
                     print("dateEnd: ${dateEnd.text}");
 
-                    if (widget.typePost == 'feed') {
+                    if (widget.typePost == 'feeds') {
                       Get.find<FeedsController>().create(
                           descriptionController.text,
                           locationController.text,

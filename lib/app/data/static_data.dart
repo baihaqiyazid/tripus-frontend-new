@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 import 'package:tripusfrontend/app/data/models/feeds_home_model.dart';
 import 'package:tripusfrontend/app/data/models/follow_model.dart';
+import 'package:tripusfrontend/app/data/models/withdraw_model.dart';
 
 import 'models/orders_agent_model.dart';
 import 'models/orders_model.dart';
@@ -12,6 +13,7 @@ import 'models/user_model.dart';
 class StaticData {
   static RxList<FeedsHome> feeds = RxList<FeedsHome>([]);
   static List<User> users = [];
+  static List<Withdraw> withdraws = [];
   static List<Follow> follows = [];
   static List<Payment> payment = [];
   static List<Orders> orders = [];
